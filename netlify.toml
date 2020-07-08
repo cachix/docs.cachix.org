@@ -1,0 +1,9 @@
+[build]
+  publish = "build/html"
+  command = "make html"
+
+[[redirects]]
+  from = "http://docs.cachix.org/*"
+  to = "https://docs.cachix.org/:splat"
+  status = 301
+  force = true
