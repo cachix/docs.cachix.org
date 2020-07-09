@@ -114,7 +114,7 @@ html_theme = "alabaster"
 
 # https://alabaster.readthedocs.io/en/latest/customization.html
 html_theme_options = {
-    "description": 'xxx',
+    "description": 'Binary Cache hosting',
     "github_user": "cachix",
     "github_repo": "docs.cachix.org",
     "github_type": "star",
