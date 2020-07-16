@@ -1,2 +1,77 @@
 Frequently Asked Questions
 ==========================
+
+What Nix versions are supported?
+--------------------------------
+
+Cachix supports Nix 2.0.2 or higher. Nix 2.3.5 or higher is recommended.
+
+
+Does pushing a store path override an existing entry?
+-----------------------------------------------------
+
+No. The existing entry first needs to be deleted.
+
+
+Are entries immediately available after they are pushed?
+--------------------------------------------------------
+
+Yes. See the next questions what might happen to seem otherwise.
+
+
+Why is Nix not picking up on any of the pre-built artifacts?
+------------------------------------------------------------
+
+For example, given that ``/nix/store/spznih45c56kfwygx8qyq1skd1rs4zv1-myproject-1.0.0`` is missing,
+check if store path exists in the binary cache::
+
+   $ curl https://mycache.cachix.org/spznih45c56kfwygx8qyq1skd1rs4zv1.narinfo
+
+If the entry exists:
+
+    1. It is possible that you need to restart ``nix-daemon`` to pick up ``nix.conf`` changes. Run ``sudo pkill nix-daemon``.
+
+    2. If you ran ``nix-build`` before binary cache has been populated,
+       Nix will maintain a negative cache for the entry.
+     
+       `See a workaround to remove negative caching <https://nix.dev/faq.html#how-do-i-force-nix-to-re-check-whether-something-exists-at-a-binary-cache>`_.
+
+    3. Substitution could be disabled for that derivation via ``allowSubstitutes = false;`` attribute.
+
+    4. On NixOS, it's `a known limitation <https://github.com/cachix/feedback/issues/5#issue-380108129>`_
+       that you first need to add cachix configuration and run ``nixos-rebuild switch`` and only after the
+       next run of ``nixos-rebuild switch`` binary caches would be used.
+
+If the entry does not exists:
+
+    1. Check if the entry that you expected has a different hash.
+     
+       You can compare the difference between two derivations via ``nix-shell -p nix-diff --run "nix-diff drv1 drv"``.
+
+       In order to have both derivations available locally you can run ``nix-instantiate default.nix | cachix push mycache``
+       to push the dervation into Cachix and then run ``nix-store -r /nix/store/hash.drv`` to retrieve it on another machine.
+
+       Common reason for derivation hash differences are `described in language anti-patterns <https://nix.dev/anti-patterns/language.html#reproducability-referencing-top-level-directory-with>`_.
+
+    3. Maybe ``cachix push`` got interrupted and the whole dependency tree is not available from Cachix.
+       In that case push again retry to make sure everything is uploaded.
+
+
+Is there a way to cache ``nix-shell``?
+--------------------------------------
+
+Many of CI integrations will push everything that was built during the CI run. 
+Otherwise you can do the following.
+
+Make sure shell dependencies are built:
+
+.. code:: shell-session
+
+    $ nix-shell --run "echo OK"
+
+Push to cachix:
+
+.. code:: shell-session
+
+    $ nix-store -qR --include-outputs $(nix-instantiate shell.nix) | cachix push mycache
+
