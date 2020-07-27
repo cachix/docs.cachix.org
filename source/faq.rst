@@ -75,3 +75,7 @@ Push to cachix:
 
     $ nix-store -qR --include-outputs $(nix-instantiate shell.nix) | cachix push mycache
 
+How to disable binary caches when working offline?
+--------------------------------------------------
+
+Pass ``--option substitute false`` to Nix commands.
