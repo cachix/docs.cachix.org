@@ -38,7 +38,7 @@ If the entry exists:
 
     3. Substitution could be disabled for that derivation via ``allowSubstitutes = false;`` attribute.
 
-    4. On NixOS, it's `a known limitation <https://github.com/cachix/feedback/issues/5#issue-380108129>`_
+    4. On NixOS, it's `a known limitation <https://github.com/cachix/cachix/issues/323#issue-380108129>`_
        that you first need to add cachix configuration and run ``nixos-rebuild switch`` and only after the
        next run of ``nixos-rebuild switch`` binary caches would be used.
 
