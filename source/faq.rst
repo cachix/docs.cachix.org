@@ -73,7 +73,8 @@ Push to cachix:
 
 .. code:: shell-session
 
-    $ nix-store -qR --include-outputs $(nix-instantiate shell.nix) | cachix push mycache
+    $ nix-store --query --references $(nix-instantiate shell.nix) | xargs nix-store --realise | xargs nix-store --query --requisites | cachix push mycache
+
 
 How to disable binary caches when working offline?
 --------------------------------------------------
