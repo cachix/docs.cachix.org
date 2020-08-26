@@ -80,3 +80,12 @@ How to disable binary caches when working offline?
 --------------------------------------------------
 
 Pass ``--option substitute false`` to Nix commands.
+
+What happens when I run `cachix use` (both immediately and any stateful effects for the future)?
+------------------------------------------------------------------------------------------------
+
+It will modify ``nix.conf`` and append substituters and trusted-public-keys.
+If you're using NixOS, it will write NixOS configuration.
+If you're a trusted-user it will append to `~/.config/nix/nix.conf`.
+
+Otherwise it will either fail in case configuration cannot be written or it will append to `/etc/nix/nix.conf`.
