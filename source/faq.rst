@@ -53,8 +53,10 @@ If the entry does not exists:
 
        Common reason for derivation hash differences are `described in language anti-patterns <https://nix.dev/anti-patterns/language.html#reproducability-referencing-top-level-directory-with>`_.
 
-    3. Maybe ``cachix push`` got interrupted and the whole dependency tree is not available from Cachix.
+    2. Maybe ``cachix push`` got interrupted and the whole dependency tree is not available from Cachix.
        In that case push again retry to make sure everything is uploaded.
+       
+    3. If the same store hash is available in https://cache.nixos.org it will count as existing upstream and won't be present in cachix
 
 
 Is there a way to cache ``nix-shell``?
