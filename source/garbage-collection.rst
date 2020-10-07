@@ -26,7 +26,7 @@ The following statistics are collected for each binary cache:
 
 Garbage collection algorithm sorts all store paths 
 **by their last accessed date or creation date if the path was never accessed**.
-It delets **the oldest entries** up until your storage limit.
+It deletes **the oldest entries** up until your storage limit.
 
 Due to a `known Nix bug <https://github.com/NixOS/nix/issues/3534>`_,
 we will never serve a :term:`narinfo` that does not contain full closure
