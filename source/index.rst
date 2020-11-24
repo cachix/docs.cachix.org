@@ -1,7 +1,7 @@
 Welcome to Cachix documentation
 ===============================
 
-`Cachix <https://cachix.org>`_ is a service for `Nix <nixos.org/>`_ :term:`binary cache` hosting.
+`Cachix <https://cachix.org>`_ is a service for `Nix <https://nixos.org/>`_ :term:`binary cache` hosting.
 
 You’ll never again **waste building anything twice** and saving time on :ref:`your CI <getting-started-ci>`.
 
