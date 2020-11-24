@@ -48,6 +48,8 @@ b) Per-cache
 Signing key (optional)
 ----------------------
 
+.. note:: `All binary caches created until 2020-11-09 are using self-generated signing key. <https://blog.cachix.org/posts/2020-11-09-write-access-control-for-binary-caches/>`
+
 When creating a binary cache you can opt-in to handle the :term:`signing key` yourself.
 In case you picked to manage your binary cache with auth tokens only, you can skip this step.
 
