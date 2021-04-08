@@ -93,3 +93,14 @@ If you're using NixOS, it will write NixOS configuration.
 If you're a trusted-user it will append to ``~/.config/nix/nix.conf``.
 
 Otherwise it will either fail in case configuration cannot be written or it will append to ``/etc/nix/nix.conf``.
+
+
+I get ``InvalidPath`` error from Nix when invoking Cachix
+---------------------------------------------------------
+
+There are two cases under which the error is raised:
+
+- Garbage Collection kicks in while Cachix is trying to push a path. 
+  To confirm if that's the case, check if GC timestamps correlate with when the error was raised
+
+- Store paths weren't built yet. Some Nix commands return store paths that would exist if Nix has built them.
