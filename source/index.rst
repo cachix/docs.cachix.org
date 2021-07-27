@@ -22,6 +22,7 @@ Topics
    installation.rst
    getting-started.rst
    continuous-integration-setup/index.rst
+   pushing.rst
    garbage-collection.rst
    security.rst
    faq.rst
