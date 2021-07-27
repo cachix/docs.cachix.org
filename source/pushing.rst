@@ -1,3 +1,5 @@
+.. _pushing:
+
 Pushing to Cachix
 =================
 

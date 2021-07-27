@@ -70,12 +70,12 @@ Assuming you have a project with ``default.nix`` you can start pushing::
 
     $ nix-build | cachix push mycache
 
-.. note:: 
+It's recommended to set up :ref:`Continuous Integration to push <getting-started-ci>` for every branch of every project.
 
-  In case you get `Signing key not found` error, make sure ``cachix --version`` says 0.5.1, otherwise :ref:`install the latest version <installation>`.
+See :ref:`all differents ways of pushing <pushing>`.
 
-It's recommended to use Continuous Integration to push for every branch of every project.
-See :ref:`getting-started-ci`.
+
+
 
 
 Using binaries with Nix
