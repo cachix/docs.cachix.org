@@ -6,7 +6,7 @@ they **are first checked for existance** in `upstream NixOS cache <https://cache
 (to avoid wasting storage) and if not, 
 they are **compressed and uploaded**.
 
-You can `switch between different storage plans <https://cachix.org/#pricing>`_
+You can `switch between different storage plans <https://www.cachix.org/pricing>`_
 to avoid reaching the storage limits.
 
 Once you reach **85% of your storage limit**, you will receive **a warning email**
