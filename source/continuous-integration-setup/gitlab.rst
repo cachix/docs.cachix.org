@@ -10,15 +10,19 @@ GitLab CI
     image: nixos/nix:2.3.12
 
     build:
+      variables:
+        CACHIX_CACHE_NAME: mycache
       before_script:
-        - nix-env -iA nixpkgs.cachix nixpkgs.bash
-        - cachix use mycache
+        - nix-env --install --attr nixpkgs.cachix
+        - cachix use "$CACHIX_CACHE_NAME"
         - nix path-info --all > /tmp/store-path-pre-build
       script:
         - nix-build default.nix
       after_script:
         # push all store paths that were added during the build
-        - bash -c "comm -13 <(sort /tmp/store-path-pre-build | grep -v '\.drv$') <(nix path-info --all | grep -v '\.drv$' | sort) | cachix push mycache"
+        - grep -v '\.drv$' /tmp/store-path-pre-build | sort > /tmp/pre-build-non-drv
+        - nix path-info --all | grep -v '\.drv$' | sort > /tmp/post-build-non-drv
+        - comm -13 /tmp/pre-build-non-drv /tmp/post-build-non-drv | cachix push "$CACHIX_CACHE_NAME"
 
 
 3. Follow `variables configuration tutorial <https://docs.gitlab.com/ee/ci/variables/#creating-a-custom-environment-variable>`_
