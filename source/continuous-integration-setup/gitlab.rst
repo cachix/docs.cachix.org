@@ -1,7 +1,7 @@
 GitLab CI
 =========
 
-1. Create new binary cache on https://app.cachix.org and generate a signing key
+1. `Create a new binary cache <https://app.cachix.org>`_ and generate a :term:`signing key`.
 
 2. Replace ``mycache`` occurrences in following ``.gitlab-ci.yml``:
 
