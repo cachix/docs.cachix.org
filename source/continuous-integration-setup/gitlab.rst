@@ -3,7 +3,7 @@ GitLab CI
 
 1. `Create a new binary cache <https://app.cachix.org>`_ and generate an :term:`access token` or :term:`signing key`.
 
-2. Replace ``mycache`` occurrences in following ``.gitlab-ci.yml``:
+2. Replace ``mycache`` in the following ``.gitlab-ci.yml`` with your own cache name:
 
 .. code:: yaml
 
