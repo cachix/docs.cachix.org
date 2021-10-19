@@ -7,7 +7,7 @@ GitLab CI
 
 .. code:: yaml
 
-    image: nixos/nix:latest
+    image: nixos/nix:2.3.12
 
     build:
       before_script:
