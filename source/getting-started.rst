@@ -45,36 +45,34 @@ b) Per-cache
     b) ``$ export CACHIX_AUTH_TOKEN=XXX``
 
 
-Signing key (optional)
-----------------------
+Signing key (advanced mode)
+---------------------------
 
-.. note:: `All binary caches created until 2020-11-09 are using self-generated signing key. <https://blog.cachix.org/posts/2020-11-09-write-access-control-for-binary-caches/>`_
+.. note:: In case you didn't opt-in to self-generated signing key, you can skip this step.
 
-When creating a binary cache you can opt-in to handle the :term:`signing key` yourself.
-In case you picked to manage your binary cache with auth tokens only, you can skip this step.
+`Read a blog post on upsides and downsides of self-generated signing key. <https://blog.cachix.org/posts/2020-11-09-write-access-control-for-binary-caches/>`_
 
-Using an auth token you can generate a :term:`signing key`::
+To generate a :term:`signing key`::
 
-    $ cachix generate-keypair mycache
+    $ cachix authtoken <my auth token>
+    $ cachix generate-keypair <mycache>
 
-:term:`Signing key <signing key>` is saved locally on your computer and printed
+:term:`Signing key <signing key>` is saved locally on your computer (the only copy!) and printed
 to stdout, make sure to make a backup.
 
-Using the recently written signing key (or by exporting it via environment variable ``$CACHIX_SIGNING_KEY``) 
+Cachix will automatically pick up the recently written signing key (or if you export it via environment variable ``$CACHIX_SIGNING_KEY``).
 
 
 Pushing binaries with Cachix
 ----------------------------
 
-Assuming you have a project with ``default.nix`` you can start pushing::
+Assuming you have a project with ``default.nix`` you can build it and push::
 
     $ nix-build | cachix push mycache
 
 It's recommended to set up :ref:`Continuous Integration to push <getting-started-ci>` for every branch of every project.
 
 See :ref:`all differents ways of pushing <pushing>`.
-
-
 
 
 

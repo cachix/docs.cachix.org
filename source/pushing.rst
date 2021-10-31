@@ -5,6 +5,8 @@ Pushing to Cachix
 
 There are different ways to push store paths to Cachix.
 
+These instructions assume your binary cache is called ``mycache``.
+
 
 Pushing runtime dependencies
 ----------------------------

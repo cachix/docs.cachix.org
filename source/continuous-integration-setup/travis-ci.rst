@@ -1,8 +1,9 @@
 Travis CI
 =========
 
-1. Create new binary cache on https://app.cachix.org and generate a signing key
-2. Replace ``mycache`` in following ``.travis.yml``:
+1. Create new binary cache on https://app.cachix.org/cache and generate a write auth token.
+
+2. Replace ``mycache`` in the following ``.travis.yml``:
 
 .. code:: yaml
 
@@ -17,19 +18,14 @@ Travis CI
   - sudo systemctl restart nix-daemon
   - nix-env -iA nixpkgs.cachix
   - cachix use $CACHIX_CACHE
-  - nix path-info --all > /tmp/store-path-pre-build
   script:
-  - nix-build
-  - nix-shell --run "echo nix-shell successfully entered"
-  after_success:
-  - comm -13 <(sort /tmp/store-path-pre-build | grep -v '\.drv$') <(nix path-info --all | grep -v '\.drv$' | sort) | cachix push $CACHIX_CACHE
+  - cachix watch-exec $CACHIX_NAME nix-build
+  - cachix watch-exec $CACHIX_NAME nix-shell --run "echo nix-shell successfully entered"
 
 3. Inside your project top-level directory run:
 
 .. code:: shell-session
 
   nix-shell -p travis --run "travis login --pro --auto"
-  nix-shell -p travis --run "travis encrypt CACHIX_SIGNING_KEY=XXX --add"
+  nix-shell -p travis --run "travis encrypt CACHIX_AUTH_TOKEN=XXX --add"
   
-4. If you're using a private cache, export ``$CACHIX_AUTH_TOKEN`` and 
-   call ``cachix authtoken $CACHIX_AUTH_TOKEN` just before ``cachix use``.

@@ -29,5 +29,5 @@ Garbage collection algorithm sorts all store paths
 It deletes **the oldest entries** up until your storage limit.
 
 Due to a `known Nix bug <https://github.com/NixOS/nix/issues/3534>`_,
-we will never serve a :term:`narinfo` that does not contain full closure
+Cachix will never serve a :term:`narinfo` that does not contain full closure
 (all dependencies).

@@ -104,3 +104,13 @@ There are two cases under which the error is raised:
   To confirm if that's the case, check if GC timestamps correlate with when the error was raised
 
 - Store paths weren't built yet. Some Nix commands return store paths that would exist if Nix has built them.
+
+
+warning: 'https://mycache.cachix.org' does not appear to be a binary cache
+--------------------------------------------------------------------------
+
+Two causes:
+
+a) You have mistyped the binary cache name 
+
+b) You didn't set correct auth token via ``netrc`` for a private binary cache. See https://{mycache}.cachix.org for instructions.
