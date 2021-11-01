@@ -51,7 +51,7 @@ If the entry does not exists:
        In order to have both derivations available locally you can run ``nix-instantiate default.nix | cachix push mycache``
        to push the dervation into Cachix and then run ``nix-store -r /nix/store/hash.drv`` to retrieve it on another machine.
 
-       Common reason for derivation hash differences are `described in language anti-patterns <https://nix.dev/anti-patterns/language.html#reproducability-referencing-top-level-directory-with>`_.
+       Common reason for derivation hash differences are `described in language anti-patterns <https://nix.dev/anti-patterns/language#reproducibility-referencing-top-level-directory-with>`_.
 
     2. Maybe ``cachix push`` got interrupted and the whole dependency tree is not available from Cachix.
        In that case push again retry to make sure everything is uploaded.
@@ -113,4 +113,4 @@ Two causes:
 
 a) You have mistyped the binary cache name 
 
-b) You didn't set correct auth token via ``netrc`` for a private binary cache. See https://{mycache}.cachix.org for instructions.
+b) You didn't set correct auth token via ``netrc`` for a private binary cache. See https://mycache.cachix.org for instructions.

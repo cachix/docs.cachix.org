@@ -3,7 +3,7 @@ Hydra
 
 .. source https://github.com/tbenst/nix-data-hydra/pull/2/files#diff-3367727976c111f36e7d3210944788ba
 
-You'll need to deploy all build machines with a `post build hook <https://nixos.org/nix/manual/#chap-post-build-hook>`_. 
+You'll need to deploy all build machines with a `post build hook <https://nixos.org/manual/nix/stable/advanced-topics/post-build-hook.html>`_. 
 
 1. Create new binary cache on https://app.cachix.org and generate a signing key
 
