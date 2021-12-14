@@ -22,3 +22,9 @@ Glossary
 
   access token
     Secret for accessing Cachix HTTP API authenticated to a user.
+
+  agent 
+    Cachix Deploy Agent manages a lifecycle of a Nix profile. The agent connects to Cachix and awaits new deployments.
+
+  store path 
+    Example: /nix/store/41zwxsdh0l66zvq2wqxnyx55xa1jn9b9-nixos-system-cherimoya-21.05.3367.fd8a7fd07da
