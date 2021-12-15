@@ -4,25 +4,23 @@ Deploying to agents
 Prerequisites
 -------------
 
-Start by :ref:`running your agent <running-an-agent>`.
+Start by :ref:`getting your agent running <running-an-agent>`.
 
 
-Get Deploy Activate auth token 
+Get Deploy Activate Auth Token 
 ------------------------------
 
 
-1. Click **"Start a Deployment"** `in your workspace <https://app.cachix.org/deploy/>`_ 
-2. Write the description of the token, for example "github actions CD"
+1. Click **"Start a Deployment"** `on your workspace <https://app.cachix.org/deploy/>`_ 
+2. Write the description of the token, for an example "github actions CD"
 3. Click **"Generate"**
-4. Copy the token
+4. Copy the token and save it
 
 
-Write Nix 
----------
+Write Deploy specification 
+--------------------------
 
-The following deploys NixOS to the agent named ``virtualbox`` and assumes the agent is running inside Virtualbox.
-
-To understand the JSON specification see :ref:`the reference <deploy-json>`.
+The following deploys NixOS to the agent named ``myagent`` in file ``deploy.nix``:
 
 .. code-block:: nix 
         
@@ -34,24 +32,24 @@ To understand the JSON specification see :ref:`the reference <deploy-json>`.
           fileSystems."/" = { device = "/dev/disk/by-label/nixos"; };
           boot.loader.grub.devices = ["/dev/sda"];
           boot.loader.grub.enable = true;
-          networking.hostName = "virtualbox";
-          environment.systemPackages =  [ pkgs.git pkgs.vim ];
-          networking.interfaces.enp0s3.useDHCP = true;
-          virtualisation.virtualbox.guest.enable = true;
+          networking.hostName = "myagent";
         }).toplevel;
       };
     })
+
+To fully grasp the JSON specification see :ref:`the reference <deploy-json>`.
 
 
 Activate the deployment 
 -----------------------
 
-Assuming you've created a binary cache called ``mycache``, you
-have a write token to replace ``CACHE-TOKEN`` and 
-recently generated token to replace ``ACTIVATE-TOKEN``.
+Assuming you've created a binary cache called ``mycache``:
+
+- you have a write token to replace ``CACHE-TOKEN`` 
+- previously generated token to replace ``ACTIVATE-TOKEN``.
 
 The following snippet will build your machine, push binaries to ``mycache``
-and deploy your agent. 
+and deploy your agent:
 
 :: 
         

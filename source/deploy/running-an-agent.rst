@@ -17,10 +17,10 @@ For the beta you install Cachix client from the ``master`` branch::
 Create a binary cache 
 ---------------------
 
-The agent requires a binary cache to download the closure it needs to activate.
+The agent requires a binary cache to download the closure it wants to activate.
 
 You can `create a binary cache <https://app.cachix.org/cache/>`_ with Cachix and
-the agent will automatically use it.
+the your agents will automatically use it.
 
 Alternatively, you can roll your own binary cache.
 
@@ -38,21 +38,21 @@ Start by `creating a workspace <https://app.cachix.org/deploy/>`_.
 Generate agent token
 --------------------
 
-One you have a workspace, you can generate an agent token.
+Once you have a workspace, you can generate an agent token.
 
-1. Click **"Add an Agent"** `in your workspace <https://app.cachix.org/deploy/>`_ 
-2. Write the description of the token, for example "my homelab agents token"
+1. Click **"Add an Agent"** `at your workspace <https://app.cachix.org/deploy/>`_ 
+2. Write the description of the token, for an example "my homelab agents token"
 3. Click **"Generate"**
-4. Copy the token
+4. Copy the token and save it
+
 
 Starting an agent
 -----------------
 
-
 Manually
 ********
 
-To run the agent you'll need ``AGENT-TOKEN`` and pick ``AGENT-NAME``.
+To run the agent you'll need previously generated ``AGENT-TOKEN`` and pick an ``AGENT-NAME``.
 
 ``NIX-PROFILE-NAME`` is optional and defaults to NixOS.
 
@@ -64,7 +64,8 @@ For example::
 
   $ CACHIX_AGENT_TOKEN=... cachix deploy agent virtualbox
 
-You should see an agent appear in `your workspace <https://app.cachix.org/deploy/>`_
+You should see an agent appear `at your workspace <https://app.cachix.org/deploy/>`_
+
 
 NixOS
 *****
