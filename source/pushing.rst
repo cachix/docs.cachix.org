@@ -22,7 +22,7 @@ Pushing build and runtime dependencies
 .. code:: shell-session
 
   $ nix-store -qR --include-outputs $(nix-store -qd $(nix-build)) \
-    | grep '\.drv$' \
+    | grep -v '\.drv$' \
     | cachix push mycache
 
 
