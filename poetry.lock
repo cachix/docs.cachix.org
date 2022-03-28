@@ -49,14 +49,6 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
-name = "click"
-version = "7.1.2"
-description = "Composable command line interface toolkit"
-category = "main"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
-
-[[package]]
 name = "colorama"
 version = "0.4.4"
 description = "Cross-platform colored terminal text."
@@ -135,20 +127,23 @@ pyparsing = ">=2.0.2"
 
 [[package]]
 name = "pydata-sphinx-theme"
-version = "0.7.2"
+version = "0.8.1"
 description = "Bootstrap-based Sphinx theme from the PyData community"
 category = "main"
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.7"
 
 [package.dependencies]
 beautifulsoup4 = "*"
 docutils = "!=0.17.0"
-sphinx = "*"
+packaging = "*"
+sphinx = ">=3.5.4,<5"
 
 [package.extras]
-coverage = ["pytest-cov", "codecov", "sphinx", "numpydoc", "recommonmark", "pandas", "pytest", "pytest-regressions", "beautifulsoup4", "sphinx-sitemap", "jupyter-sphinx", "plotly", "numpy", "xarray", "docutils (==0.16)"]
-test = ["sphinx", "numpydoc", "recommonmark", "pandas", "pytest", "pytest-regressions", "beautifulsoup4", "sphinx-sitemap", "jupyter-sphinx", "plotly", "numpy", "xarray", "docutils (==0.16)"]
+doc = ["numpydoc", "myst-parser", "pandas", "pytest", "pytest-regressions", "sphinxext-rediraffe", "sphinx-sitemap", "jupyter-sphinx", "plotly", "numpy", "xarray"]
+test = ["pytest", "pydata-sphinx-theme"]
+coverage = ["pytest-cov", "codecov", "pydata-sphinx-theme"]
+dev = ["pyyaml", "pre-commit", "nox", "pydata-sphinx-theme"]
 
 [[package]]
 name = "pygments"
@@ -257,25 +252,21 @@ test = ["pytest", "pytest-cov", "html5lib", "cython", "typed-ast"]
 
 [[package]]
 name = "sphinx-book-theme"
-version = "0.1.9"
+version = "0.3.1"
 description = "A clean book theme for scientific explanations and documentation with Sphinx"
 category = "main"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 
 [package.dependencies]
-beautifulsoup4 = ">=4.6.1,<5"
-click = ">=7.1,<8.0"
-docutils = ">=0.15,<0.17"
-pydata-sphinx-theme = ">=0.7.2,<0.8.0"
+pydata-sphinx-theme = ">=0.8.0,<0.9.0"
 pyyaml = "*"
 sphinx = ">=3,<5"
 
 [package.extras]
 code_style = ["pre-commit (>=2.7.0,<2.8.0)"]
-live-dev = ["sphinx-autobuild", "web-compile (>=0.2.1,<0.3.0)"]
-sphinx = ["ablog (>=0.10.13,<0.11.0)", "ipywidgets", "folium", "numpy", "matplotlib", "myst-nb (>=0.13,<1.0)", "nbclient", "pandas", "plotly", "sphinx (>=4.0,<5.0)", "sphinx-design", "sphinx-copybutton", "sphinx-togglebutton (>=0.2.1)", "sphinx-thebe", "sphinxcontrib-bibtex (>=2.2,<3.0)", "sphinxext-opengraph"]
-testing = ["coverage", "myst-nb (>=0.13,<1.0)", "pytest (>=6.0.1,<6.1.0)", "pytest-cov", "pytest-regressions (>=2.0.1,<2.1.0)", "sphinx-thebe"]
+doc = ["ablog (>=0.10.13,<0.11.0)", "ipywidgets", "folium", "numpy", "matplotlib", "numpydoc", "myst-nb (>=0.13,<1.0)", "nbclient", "pandas", "plotly", "sphinx (>=4.0,<5.0)", "sphinx-design", "sphinx-copybutton", "sphinx-tabs", "sphinx-togglebutton (>=0.2.1)", "sphinx-thebe (>=0.1.1)", "sphinxcontrib-bibtex (>=2.2,<3.0)", "sphinxcontrib-youtube", "sphinxext-opengraph"]
+test = ["beautifulsoup4 (>=4.6.1,<5)", "coverage", "myst_nb (>=0.13,<1.0)", "pytest (>=6.0.1,<6.1.0)", "pytest-cov", "pytest-regressions (>=2.0.1,<2.1.0)", "sphinx-thebe"]
 
 [[package]]
 name = "sphinx-copybutton"
@@ -387,7 +378,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "105e31ddc869c7c52830209244a2431e4f45599ecb7dc9e8a8ccc9809df3a580"
+content-hash = "c34006d78839b3c077098b60b47abc581d1c8acfbeccd4a7a693917e5d2edbf9"
 
 [metadata.files]
 alabaster = [
@@ -410,10 +401,6 @@ certifi = [
 chardet = [
     {file = "chardet-4.0.0-py2.py3-none-any.whl", hash = "sha256:f864054d66fd9118f2e67044ac8981a54775ec5b67aed0441892edb553d21da5"},
     {file = "chardet-4.0.0.tar.gz", hash = "sha256:0d6f53a15db4120f2b08c94f11e7d93d2c911ee118b6b30a04ec3ee8310179fa"},
-]
-click = [
-    {file = "click-7.1.2-py2.py3-none-any.whl", hash = "sha256:dacca89f4bfadd5de3d7489b7c8a566eee0d3676333fbb50030263894c38c0dc"},
-    {file = "click-7.1.2.tar.gz", hash = "sha256:d2b5255c7c6349bc1bd1e59e08cd12acbbd63ce649f2588755783aa94dfb6b1a"},
 ]
 colorama = [
     {file = "colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
@@ -514,8 +501,8 @@ packaging = [
     {file = "packaging-20.9.tar.gz", hash = "sha256:5b327ac1320dc863dca72f4514ecc086f31186744b84a230374cc1fd776feae5"},
 ]
 pydata-sphinx-theme = [
-    {file = "pydata-sphinx-theme-0.7.2.tar.gz", hash = "sha256:671df35fcdd290eafbd23d0595e6d359dbe90b2e64e6c3f4dc88276eed4a065e"},
-    {file = "pydata_sphinx_theme-0.7.2-py3-none-any.whl", hash = "sha256:bc1abc45e103b254c6c7a8f2ddabbaf8aa1f0817d85cae65dd163dd554c52700"},
+    {file = "pydata_sphinx_theme-0.8.1-py3-none-any.whl", hash = "sha256:af2c99cb0b43d95247b1563860942ba75d7f1596360594fce510caaf8c4fcc16"},
+    {file = "pydata_sphinx_theme-0.8.1.tar.gz", hash = "sha256:96165702253917ece13dd895e23b96ee6dce422dcc144d560806067852fe1fed"},
 ]
 pygments = [
     {file = "Pygments-2.9.0-py3-none-any.whl", hash = "sha256:d66e804411278594d764fc69ec36ec13d9ae9147193a1740cd34d272ca383b8e"},
@@ -581,8 +568,8 @@ sphinx = [
     {file = "Sphinx-4.3.2.tar.gz", hash = "sha256:0a8836751a68306b3fe97ecbe44db786f8479c3bf4b80e3a7f5c838657b4698c"},
 ]
 sphinx-book-theme = [
-    {file = "sphinx-book-theme-0.1.9.tar.gz", hash = "sha256:23538827b7a719b9d2b648ff2d43a4aa4310d721b4eed5696f129ed9d827df36"},
-    {file = "sphinx_book_theme-0.1.9-py3-none-any.whl", hash = "sha256:b42fcadc9085cdda606a5819ef33e4673526b21e1a46d7bf543217c087c17077"},
+    {file = "sphinx_book_theme-0.3.1-py3-none-any.whl", hash = "sha256:31755ba7703a8d0841862ad3c56d8856bf4173d40ef71e116b758ae495c772a1"},
+    {file = "sphinx_book_theme-0.3.1.tar.gz", hash = "sha256:3b59b3bcb9a32a56e0bec8786d24cae3923d4c5f1af55544c38ce3e61262dea9"},
 ]
 sphinx-copybutton = [
     {file = "sphinx-copybutton-0.4.0.tar.gz", hash = "sha256:8daed13a87afd5013c3a9af3575cc4d5bec052075ccd3db243f895c07a689386"},
