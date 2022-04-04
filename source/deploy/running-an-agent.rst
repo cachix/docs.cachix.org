@@ -62,24 +62,57 @@ To run the agent you'll need previously generated ``AGENT-TOKEN`` and pick an ``
 
 For example::
 
-  $ CACHIX_AGENT_TOKEN=... cachix deploy agent virtualbox
+  $ CACHIX_AGENT_TOKEN=... cachix deploy agent myagentname
 
-You should see an agent appear `at your workspace <https://app.cachix.org/deploy/>`_
+You should see an agent appear `at your workspace <https://app.cachix.org/deploy/>`_.
 
+Continue by :ref:`making your first deployment for your agent <deploying-to-agents>`.
 
 NixOS
 *****
 
-This section will be added before Xmas.
+You'll first need to populate ``/etc/cachix-agent.token`` with the previously 
+generated agent token in the form of ``CACHIX_AGENT_TOKEN=XXX``.
 
+Then set the following NixOS options:
 
-nix-darwin 
+::
+
+    cachix-agent.enable = true;
+    networking.hostName = "myhostname";
+
+And run ``nixos-rebuild switch`` to activate the new configuration that will start the agent.
+
+You should see an agent appear `at your workspace <https://app.cachix.org/deploy/>`_.
+
+Continue by :ref:`making your first deployment for your agent <deploying-to-agents>`.
+
+.. _nix-darwin-run-agent:
+
+nix-darwin
 **********
 
-Support for nix-darwin will be added until Xmas.
+You'll need to first install Nix::
+
+  curl -L https://nixos.org/nix/install | sh
+
+Then exit your terminal and start it again, so that the Nix environment loads.
+
+Next you need to install Cachix::
+
+  nix-env -iA cachix -f https://cachix.org/api/v1/install
+
+Then with :ref:`the previously generated token <nix-darwin-run-agent>`::
+
+  CACHIX_AGENT_TOKEN=... cachix deploy agent myagent
+
+You should see an agent appear `at your workspace <https://app.cachix.org/deploy/>`_.
+
+Continue by :ref:`making your first deployment for your agent <deploying-to-agents>`.
 
 
 home-manager
 ************
 
-Support for nix-darwin will be added until Xmas.
+Please leave a comment on `this issue <https://github.com/cachix/cachix/issues/TODO>`_
+if you'd like home-manager support.
