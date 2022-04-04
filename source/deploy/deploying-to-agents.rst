@@ -97,7 +97,7 @@ The following deploys nix-darwin to the agent named ``myagent`` in a file named 
         })
       );
     };
-}
+  }
 
 
 Activate the deployment 
