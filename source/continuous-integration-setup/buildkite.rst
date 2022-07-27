@@ -3,7 +3,7 @@ Buildkite
 
 1. Create new binary cache on https://app.cachix.org/cache and generate a write auth token.
 
-2. Follow `buildkite storing secrets in environment hooks <https://buildkite.com/docs/pipelines/secrets#storing-secrets-in-environment-hooks>`_
+2. Follow `buildkite storing secrets in environment hooks <https://buildkite.com/docs/pipelines/secrets#exporting-secrets-with-environment-hooks>`_
    tutorial to set ``$CACHIX_AUTH_TOKEN``.
 
 3. Replace ``mycache`` in the following ``.buildkite/pipeline.yml``:
