@@ -4,13 +4,13 @@ NixOS
 *****
 
 You'll first need to populate ``/etc/cachix-agent.token`` with the previously 
-generated agent token in the form of ``CACHIX_AGENT_TOKEN=XXX``.
+generated agent token with the contents:``CACHIX_AGENT_TOKEN=XXX``.
 
 Then set the following NixOS options:
 
 ::
 
-    cachix-agent.enable = true;
+    services.cachix-agent.enable = true;
 
     # agent name is inferred from the hostname
     networking.hostName = "myhostname";
