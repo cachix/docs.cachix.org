@@ -164,6 +164,6 @@ and deploy your agent:
     export CACHIX_ACTIVATE_TOKEN=ACTIVATE-TOKEN
     export CACHIX_AUTH_TOKEN=CACHE-TOKEN
 
-    spec=$(nix build)
+    spec=$(nix build --print-out-paths)
     cachix push mycache $spec
     cachix deploy activate $spec
