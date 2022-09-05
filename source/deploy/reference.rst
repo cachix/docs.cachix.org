@@ -25,8 +25,11 @@ If no ``agent-name`` is registered with Cachix, HTTP error 400 will be raised.
 
 ``top-level-store-path`` can be any store path. The agent will detect NixOS, nix-darwin and home-manager store paths and activate them.
 
+
 ``rollbackScript`` is an optional collection of per-system store path scripts that are run after each deployment. 
 Use it to perform tests, validate the deployment, and, if necessary, trigger a rollback.
+
+.. versionadded:: 1.0.0
 
 ``system`` is a Nix system string, e.g. ``x86_64-linux`` or ``x86_64-darwin``.
 
