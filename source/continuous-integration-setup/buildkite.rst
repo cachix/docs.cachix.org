@@ -17,9 +17,9 @@ Buildkite
     - label: Set up Cachix
         commands:
         - nix-env -iA nixpkgs.cachix
-        - cachix use $CACHIX_NAME
+        - cachix use $CACHE_NAME
     - wait
     - label: Build
         commands:
-        - cachix watch-exec $CACHIX_NAME nix-build
-        - cachix watch-exec $CACHIX_NAME nix-shell --run "echo nix-shell successfully entered"
+        - cachix watch-exec $CACHE_NAME nix-build
+        - cachix watch-exec $CACHE_NAME nix-shell --run "echo nix-shell successfully entered"
