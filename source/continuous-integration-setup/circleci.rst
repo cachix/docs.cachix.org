@@ -3,7 +3,7 @@ CircleCI
 
 1. Create new binary cache on https://app.cachix.org/cache and generate a write auth token.
 
-2. Follow `circleci documentation to setup environment variable <https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project>`_  to set ``$CACHIX_AUTH_TOKEN``.
+2. Follow `circleci documentation to setup environment variable <https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project>`_  to set ``$CACHIX_AUTH_TOKEN``.
 
 2. Replace ``mycache`` in the following ``.circleci/config.yml``:
 
