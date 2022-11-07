@@ -7,7 +7,7 @@ let
 in pkgs.stdenv.mkDerivation {
     name = "docs.cachix.org";
     src = ./.;
-    buildInputs = [ nix-dev-pyenv ];
+    buildInputs = [ pkgs.ncdu ];
     buildPhase = ''
         make html
     '';

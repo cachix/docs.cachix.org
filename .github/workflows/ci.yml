@@ -9,8 +9,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: cachix/install-nix-action@v18
-    - name: Build
-      run: nix-build
-    - name: Link check
-      run: nix-shell --run "make linkcheck"
-
+    - run: |
+         nix-shell
+         which ncdu
