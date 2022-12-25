@@ -141,11 +141,51 @@ Simple Nix Profile
   }
 
 
-home-manager
+Home Manager
 ************
 
-Please leave a comment on `this issue <https://github.com/cachix/cachix/issues/422>`_
-if you'd like home-manager support.
+The following deploys a standalone Home Manager to the agent named
+``myagent`` in a file named ``flake.nix``:
+
+.. code-block:: nix
+
+  {
+    inputs = {
+      nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
+      flake-utils.url = "github:numtide/flake-utils";
+      cachix-deploy-flake.url = "github:cachix/cachix-deploy-flake";
+      cachix-deploy-flake.inputs.home-manager.follows = "home-manager";
+      home-manager.url = "github:nix-community/home-manager";
+      home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    outputs = { self, flake-utils, home-manager, nixpkgs, cachix-deploy-flake }:
+      flake-utils.lib.eachDefaultSystem (
+        system: {
+          defaultPackage = let
+            pkgs = nixpkgs.legacyPackages."${system}";
+            cachix-deploy-lib = cachix-deploy-flake.lib pkgs;
+          in
+            cachix-deploy-lib.spec {
+              agents = {
+                myagent = cachix-deploy-lib.homeManager { } (
+                  { pkgs, ... }:
+                    {
+                      home.username = "jdoe";
+                      home.homeDirectory = "/home/jdoe";
+                      home.stateVersion = "22.05";
+
+                      services.cachix-agent = {
+                        enable = true;
+                        name = "myagent";
+                      };
+                    }
+                );
+              };
+            };
+        }
+      );
+  }
 
 
 Activate the deployment 

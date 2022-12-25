@@ -10,7 +10,7 @@ Cachix Deploy
         
 
 `Cachix Deploy <https://app.cachix.org/deploy/>`_ provides continuous deployments to a Nix profile 
-(like NixOS, nix-darwin or home-manager) using a binary cache.
+(like NixOS, nix-darwin or Home Manager) using a binary cache.
 
 It consists of running a simple agent process ``cachix deploy agent`` that listens for a new deployment
 and executes them. There's no Nix evaluation or building done on the agent. The
