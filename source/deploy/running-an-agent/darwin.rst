@@ -15,9 +15,13 @@ Next you need to install Cachix::
 
 Then with :ref:`the previously generated token <generate-agent-token>`::
 
-  CACHIX_AGENT_TOKEN=... cachix deploy agent myagent
+  CACHIX_AGENT_TOKEN=... cachix deploy agent --bootstrap myagent
 
 You should see an agent appear `at your workspace <https://app.cachix.org/deploy/>`_.
 
 Continue by :ref:`making your first deployment for your agent <deploying-to-agents>`.
 
+If you need to troubleshoot:
+
+- If the agent doesn't start, check `tail -f /var/log/cachix-agent.log`.
+- If you want to restart the agent, run `sudo launchctl kickstart -k system/org.nixos.cachix-agent`
