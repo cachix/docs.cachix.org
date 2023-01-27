@@ -31,4 +31,4 @@ CircleCI
               nix-env -iA nixpkgs.cachix nixpkgs.bash
               cachix use $CACHIX_NAME
         - run: cachix watch-exec $CACHIX_NAME nix-build
-        - run: cachix watch-exec $CACHIX_NAME nix-shell --run "echo nix-shell successfully entered"
+        - run: cachix watch-exec $CACHIX_NAME -- nix-shell --run "echo nix-shell successfully entered"
