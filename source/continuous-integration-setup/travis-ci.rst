@@ -20,7 +20,7 @@ Travis CI
   - cachix use $CACHIX_CACHE
   script:
   - cachix watch-exec $CACHIX_NAME nix-build
-  - cachix watch-exec $CACHIX_NAME nix-shell --run "echo nix-shell successfully entered"
+  - cachix watch-exec $CACHIX_NAME -- nix-shell --run "echo nix-shell successfully entered"
 
 3. Inside your project top-level directory run:
 

@@ -22,4 +22,4 @@ Buildkite
     - label: Build
         commands:
         - cachix watch-exec $CACHE_NAME nix-build
-        - cachix watch-exec $CACHE_NAME nix-shell --run "echo nix-shell successfully entered"
+        - cachix watch-exec $CACHE_NAME -- nix-shell --run "echo nix-shell successfully entered"

@@ -56,7 +56,7 @@ Push all store paths produced during a command
 
 .. code:: shell-session
 
-  $ cachix watch-exec mycache nix-build -- --max-jobs 4
+  $ cachix watch-exec mycache -- nix-build --max-jobs 4
 
 
 Flakes

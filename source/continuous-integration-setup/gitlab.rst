@@ -16,7 +16,7 @@ GitLab CI
         - nix-env --install --attr nixpkgs.cachix
         - cachix use "$CACHIX_CACHE_NAME"
       script:
-        - cachix watch-exec $CACHIX_CACHE_NAME nix-build default.nix
+        - cachix watch-exec $CACHIX_CACHE_NAME -- nix-build default.nix
 
 
 3. Follow `variables configuration tutorial <https://docs.gitlab.com/ee/ci/variables/#creating-a-custom-environment-variable>`_
