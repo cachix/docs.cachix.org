@@ -9,7 +9,7 @@ license = "CC BY-SA"
 python = "^3.7"
 sphinx = "4.3.2"
 livereload = "2.6.3"
-sphinx-book-theme = "0.1.9"
+sphinx-book-theme = "1.0.0"
 sphinx-copybutton = "0.5.0"
 
 [tool.poetry.dev-dependencies]
