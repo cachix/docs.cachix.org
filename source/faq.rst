@@ -114,3 +114,11 @@ Two causes:
 a) You have mistyped the binary cache name 
 
 b) You didn't set correct auth token via ``netrc`` for a private binary cache. See https://mycache.cachix.org for instructions.
+
+
+How can I check if my auth token works?
+---------------------------------------
+
+```
+$ curl -v -H "Authorization: Bearer <token>" https://app.cachix.org/api/v1/user
+```
