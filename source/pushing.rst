@@ -81,7 +81,7 @@ Copying them over to Cachix saves you from that day.
 Pushing runtime closure
 ***********************
 
-To push runtime closure of all packages in a Flake:
+To push runtime closure of the default package in a Flake:
 
 .. code:: shell-session
 
@@ -89,6 +89,7 @@ To push runtime closure of all packages in a Flake:
     | jq -r '.[].outputs | to_entries[].value' \
     | cachix push mycache
 
+Note: to build all packages, leave a thumbs up on [#7165](https://github.com/NixOS/nix/issues/7165) issue.
 
 Pushing shell environment
 *************************
