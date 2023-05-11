@@ -1,4 +1,4 @@
 GitHub Actions (recommended)
 ============================
 
-Follow `the official tutorial <https://nix.dev/tutorials/continuous-integration-github-actions.html>`_.
+Follow `the official tutorial <https://nix.dev/tutorials/nixos/build-and-deploy/continuous-integration-github-actions>`_.
