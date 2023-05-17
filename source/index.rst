@@ -21,6 +21,7 @@ Topics
    deploy/index.rst
    pushing.rst
    garbage-collection.rst
+   pins.rst
    security.rst
    faq.rst
    glossary.rst
