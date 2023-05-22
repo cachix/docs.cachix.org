@@ -27,7 +27,7 @@ How to Create a Pin
 
    $ cachix pin mycache v1.0 /nix/store/xxx-name-1.0
 
-Current Pins can be viewed and managed from your cache's dashboard at `mycache.cachix.org <https://cachix.cachix.org>`.
+Current Pins can be viewed and managed from your cache's dashboard at `mycache.cachix.org <https://cachix.cachix.org>`_.
 
 Controlling Retention with Pins
 -------------------------------
