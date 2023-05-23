@@ -33,8 +33,8 @@ If the entry exists:
 
     2. If you ran ``nix-build`` before binary cache has been populated,
        Nix will maintain a negative cache for the entry.
-     
-       `See a workaround to remove negative caching <https://nix.dev/faq.html#how-do-i-force-nix-to-re-check-whether-something-exists-at-a-binary-cache>`_.
+
+       `See a workaround to remove negative caching <https://nix.dev/recipes/faq.html#how-do-i-force-nix-to-re-check-whether-something-exists-at-a-binary-cache>`_.
 
     3. Substitution could be disabled for that derivation via ``allowSubstitutes = false;`` attribute.
 
