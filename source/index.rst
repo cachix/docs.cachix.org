@@ -23,5 +23,6 @@ Topics
    garbage-collection.rst
    pins.rst
    security.rst
+   enterprise/index.rst
    faq.rst
    glossary.rst
