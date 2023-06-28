@@ -23,5 +23,5 @@ Below is a selection of useful span attributes that are exported by Cachix Serve
    "cachix.auth.is_success", "boolean", "Whether the request was authenticated successfully."
    "cachix.auth.token.id", "uuid", "The ID of the token used to authenticate the request."
    "cachix.auth.token.scopes", "string", "The auth scopes of the token used to authenticate the request."
-   "http.client_ip", "string", "The remote IP address of the client."
+   "client.address", "string", "The remote IP address of the client."
 
