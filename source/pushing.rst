@@ -96,5 +96,5 @@ Pushing shell environment
 
 .. code:: shell-session
 
-  $ nix develop --profile dev-profile 
+  $ nix develop --profile dev-profile -c true
   $ cachix push mycache dev-profile
