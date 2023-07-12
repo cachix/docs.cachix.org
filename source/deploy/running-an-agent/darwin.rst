@@ -15,7 +15,7 @@ Next you need to install Cachix::
 
 Then with :ref:`the previously generated token <generate-agent-token>`::
 
-  CACHIX_AGENT_TOKEN=... cachix deploy agent --bootstrap myagent
+  sudo -H CACHIX_AGENT_TOKEN=... cachix deploy agent --bootstrap myagent
 
 You should see an agent appear `at your workspace <https://app.cachix.org/deploy/>`_.
 
