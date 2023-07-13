@@ -5,18 +5,18 @@ Cachix Deploy
 
 .. note:: 
    
-   Cachix Deploy is in public beta. This means you won't be charged for usage
-   and the design might change, but with a documented migration path.
+   Cachix Deploy is in public beta. This means you won't be charged, as we
+   are gathering feedback.
         
 
 `Cachix Deploy <https://app.cachix.org/deploy/>`_ provides continuous deployments to a Nix profile 
-(like NixOS, nix-darwin or Home Manager) using a binary cache.
+(like [NixOS](https://nixos.org), [nix-darwin](https://github.com/LnL7/nix-darwin) or [Home Manager](https://github.com/nix-community/home-manager)) using a pull model.
 
-It consists of running a simple agent process ``cachix deploy agent`` that listens for a new deployment
-and executes them. There's no Nix evaluation or building done on the agent. The
-agent pulls all dependencies from your binary cache and activates the new profile. 
+It consists of running a simple daemon process ``cachix deploy agent`` that connects to our backend using websockets and 
+waits for a new deployment. There's no Nix evaluation or building done on the agent. The
+agent pulls all binaries from your binary cache and activates the new deployment. 
 
-To start new deployments you run ``cachix deploy activate`` with a specification
+To start new deployments you run ``cachix deploy activate <deploy.json>`` with a specification
 of what each agent should deploy.
 
 
