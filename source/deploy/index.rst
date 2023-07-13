@@ -12,7 +12,7 @@ Cachix Deploy
 `Cachix Deploy <https://app.cachix.org/deploy/>`_ provides continuous deployments to a Nix profile 
 (like `NixOS <https://nixos.org>`_, `nix-darwin <https://github.com/LnL7/nix-darwin>`_ or `Home Manager <https://github.com/nix-community/home-manager>`_) using a pull model.
 
-It consists of running a simple daemon process ``cachix deploy agent`` that connects to our backend using websockets and 
+It consists of running a simple daemon process ``cachix deploy agent myagent`` that connects to our backend using websockets and 
 waits for a new deployment. There's no Nix evaluation or building done on the agent. The
 agent pulls all binaries from your binary cache and activates the new deployment. 
 
