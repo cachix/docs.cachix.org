@@ -19,6 +19,7 @@ agent pulls all binaries from your binary cache and activates the new deployment
 To start new deployments you run ``cachix deploy activate <deploy.json>`` with a specification
 of what each agent should deploy.
 
+See [an example of how we deploy our self-managed CI workers](https://github.com/cachix/cachix-ci-agents).
 
 .. toctree::
    :maxdepth: 2
