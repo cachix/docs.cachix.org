@@ -10,4 +10,4 @@ Existing agent won't be able to pick up the new name, so you need to bootstrap i
 
     CACHIX_AGENT_TOKEN=XXX cachix deploy agent --bootstrap new-agent-name
 
-Once the deployment succeeds, the the daemon will exit.
+Once the deployment succeeds, the daemon will exit.
