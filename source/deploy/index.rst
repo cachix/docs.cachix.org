@@ -27,4 +27,5 @@ See `an example of how we deploy our self-managed CI workers <https://github.com
 
    running-an-agent/index.rst
    deploying-to-agents/index.rst
+   troubleshooting.rst
    reference.rst
