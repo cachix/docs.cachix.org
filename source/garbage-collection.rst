@@ -4,7 +4,7 @@ Garbage Collection
 ==================
 
 When pushing Nix store paths to Cachix,
-they **are first checked for existance** in `upstream NixOS cache <https://cache.nixos.org>`_
+they **are first checked for existence** in `upstream NixOS cache <https://cache.nixos.org>`_
 (to avoid wasting storage) and if not, 
 they are **compressed and uploaded**.
 
