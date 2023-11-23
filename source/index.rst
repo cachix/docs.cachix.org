@@ -18,6 +18,7 @@ Topics
    installation.rst
    getting-started.rst
    continuous-integration-setup/index.rst
+   importing-from-s3.rst
    deploy/index.rst
    pushing.rst
    garbage-collection.rst
