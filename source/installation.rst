@@ -7,7 +7,7 @@ Installation
 Recommended
 -----------
 
-With `Nix installed <https://nix.dev/tutorials/install-nix.html>`_::
+With `Nix installed <https://nix.dev/install-nix>`_::
 
     $ nix-env -iA cachix -f https://cachix.org/api/v1/install
 
