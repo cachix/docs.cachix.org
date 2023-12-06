@@ -62,4 +62,3 @@ Important Notes
 ---------------
 
 - Data Streaming: All contents of the cache will be streamed through the machine executing the command. It is recommended to perform this operation on a machine with a fast network connection.
-- Data Integrity: Ensure the integrity of the data during the transfer to avoid any corruption or loss of cache data.
