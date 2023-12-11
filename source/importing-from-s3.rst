@@ -48,7 +48,7 @@ To import the binary cache from your S3 bucket to Cachix, use the following comm
 
 Syntax::
 
-  $ cachix import <cache-name> s3://<bucket-name>
+  $ cachix import <cache-name> s3://<bucket-name>?endpoint=<uri>&region=<region>
 
 
 Example::
