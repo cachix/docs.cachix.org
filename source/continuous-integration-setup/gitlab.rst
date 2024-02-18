@@ -7,13 +7,12 @@ GitLab CI
 
 .. code:: yaml
 
-    image: nixos/nix:2.3.12
+    image: docker.nix-community.org/nixpkgs/cachix-flakes
 
     build:
       variables:
         CACHIX_CACHE_NAME: mycache
       before_script:
-        - nix-env --install --attr nixpkgs.cachix
         - cachix use "$CACHIX_CACHE_NAME"
       script:
         - cachix watch-exec $CACHIX_CACHE_NAME -- nix-build default.nix
