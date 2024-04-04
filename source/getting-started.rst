@@ -53,7 +53,7 @@ Signing key (advanced)
 .. note:: If you didn't opt in to using a self-generated signing key when creating the cache, you can skip this step.
 
 Store paths in Nix are signed with public-key encryption to prevent tampering.
-By default, Cachix will manage the entire signing process for you and it's what we recommend for most users.
+By default, Cachix will manage the entire signing process for you. This is what we recommend for most users.
 
 Advanced users can opt in to use their own signing key when creating a new cache. The signing key can be securely generated and stored on your machine.
 The Cachix CLI will then sign the store paths locally, adding a extra layer of protection against Man-In-The-Middle and cache poisoning attacks.
@@ -65,8 +65,8 @@ To generate a new :term:`signing key`::
     $ cachix authtoken <my auth token>
     $ cachix generate-keypair <mycache>
 
-The :term:`Signing key <signing key>` is saved locally on your computer and is printed
-to stdout. This is the only copy. Make sure to create a backup.
+The :term:`signing key <signing key>` is generated locally on your computer and is printed out to stdout.
+This is the only copy, so make sure to create a backup.
 
 Cachix will automatically pick up the recently written signing key (or if you export it via environment variable ``$CACHIX_SIGNING_KEY``).
 

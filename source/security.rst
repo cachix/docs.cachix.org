@@ -24,7 +24,9 @@ Public caches can be read by anyone on the internet. An :term:`access token` is 
 For private caches, both read or write access requires an :term:`access token`.
 
 A :term:`signing key` is used to verify the pusher of the entries to the binary cache.
+
 For managed caches (the default), the :term:`signing key` is created and managed by Cachix. Cachix will sign the store paths with this key once they're pushed to the cache.
+
 For self-signed caches, you create and manage your own :term:`signing key` locally. Signing happens on the machine pushing the store paths.
 
 
