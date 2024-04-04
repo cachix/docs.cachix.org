@@ -17,20 +17,22 @@ If you'd like to deny access to specific organizations, follow
 Secrets
 -------
 
-:term:`signing key` is used to verify the pusher (write access) of the entries to the binary cache.
+An :term:`access token` is used to authenticate the user with the Cachix HTTP API.
 
-:term:`access token` is used to authenticate the user to the Cachix HTTP API.
+Public caches can be read by anyone on the internet. An :term:`access token` is required to push to the cache.
 
-For public caches, :term:`signing key` is needed when pushing to Cachix. Otherwise all read access is public to everyone.
+For private caches, both read or write access requires an :term:`access token`.
 
-For private caches, on top of the :term:`signing key`, all requests also need :term:`access token` configured.
+A :term:`signing key` is used to verify the pusher of the entries to the binary cache.
+For managed caches (the default), the :term:`signing key` is created and managed by Cachix. Cachix will sign the store paths with this key once they're pushed to the cache.
+For self-signed caches, you create and manage your own :term:`signing key` locally. Signing happens on the machine pushing the store paths.
 
 
 Binary Caches
 -------------
 
 By using a binary cache, you are trusting that the binaries within were built by the user
-with write access. 
+with write access.
 
-For that reason the github username of the owner of the binary cache is listed on the public page
+For that reason, the GitHub username of the owner of the binary cache is listed on the public page
 so that you can verify their social trust.

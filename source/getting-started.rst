@@ -38,29 +38,35 @@ b) Per-cache
     These allow write and/or read access to only a specific binary cache. 
     On `dashboard <https://app.cachix.org>`_ you can
     click on your newly generated binary cache `Settings` and
-    generate new term:`access token`.
+    generate a new :term:`access token`.
 
-    You can set auth token either with:
+    You can set the auth token with either:
 
     a) ``$ cachix authtoken XXX``
 
     b) ``$ export CACHIX_AUTH_TOKEN=XXX``
 
 
-Signing key (advanced mode)
+Signing key (advanced)
 ---------------------------
 
-.. note:: In case you didn't opt-in to self-generated signing key, you can skip this step.
+.. note:: If you didn't opt in to using a self-generated signing key when creating the cache, you can skip this step.
 
-`Read a blog post on upsides and downsides of self-generated signing key. <https://blog.cachix.org/posts/2020-11-09-write-access-control-for-binary-caches/>`_
+Store paths in Nix are signed with public-key encryption to prevent tampering.
+By default, Cachix will manage the entire signing process for you and it's what we recommend for most users.
 
-To generate a :term:`signing key`::
+Advanced users can opt in to use their own signing key when creating a new cache. The signing key can be securely generated and stored on your machine.
+The Cachix CLI will then sign the store paths locally, adding a extra layer of protection against Man-In-The-Middle and cache poisoning attacks.
+
+`Read our blog post on the pros and cons of using a self-generated signing key. <https://blog.cachix.org/posts/2020-11-09-write-access-control-for-binary-caches/>`_
+
+To generate a new :term:`signing key`::
 
     $ cachix authtoken <my auth token>
     $ cachix generate-keypair <mycache>
 
-:term:`Signing key <signing key>` is saved locally on your computer (the only copy!) and printed
-to stdout, make sure to make a backup.
+The :term:`Signing key <signing key>` is saved locally on your computer and is printed
+to stdout. This is the only copy. Make sure to create a backup.
 
 Cachix will automatically pick up the recently written signing key (or if you export it via environment variable ``$CACHIX_SIGNING_KEY``).
 
