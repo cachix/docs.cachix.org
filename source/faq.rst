@@ -119,6 +119,6 @@ b) You didn't set correct auth token via ``netrc`` for a private binary cache. S
 How can I check if my auth token works?
 ---------------------------------------
 
-```
-$ curl -v -H "Authorization: Bearer <token>" https://app.cachix.org/api/v1/user
-```
+.. code:: shell-session
+
+    $ curl -v -H "Authorization: Bearer <token>" https://app.cachix.org/api/v1/user
