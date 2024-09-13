@@ -121,4 +121,4 @@ How can I check if my auth token works?
 
 .. code:: shell-session
 
-    $ curl -v -H "Authorization: Bearer <token>" https://app.cachix.org/api/v1/user
+    $ curl -v -H "Authorization: Bearer ${CACHIX_AUTH_TOKEN}" https://app.cachix.org/api/v1/user
