@@ -85,8 +85,14 @@ To push runtime closure of the default package in a Flake:
 
 .. code:: shell-session
 
-  $ nix build --json \
-    | jq -r '.[].outputs | to_entries[].value' \
+  $ nix build --no-link --print-out-paths \
+    | cachix push mycache
+
+To push runtime closure of any set of packages in a Flake:
+
+.. code:: shell-session
+
+  $ nix build --no-link --print-out-paths .#package-a .#package-b \
     | cachix push mycache
 
 Note: to build all packages, leave a thumbs up on [#7165](https://github.com/NixOS/nix/issues/7165) issue.
