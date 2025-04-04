@@ -19,4 +19,4 @@ GitLab CI
 
 
 3. Follow `variables configuration tutorial <https://docs.gitlab.com/ee/ci/variables/#creating-a-custom-environment-variable>`_
-   to export ``$CACHIX_AUTH_TOKEN``.
+   to ``export CACHIX_AUTH_TOKEN=...``.

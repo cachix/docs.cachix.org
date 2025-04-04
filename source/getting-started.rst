@@ -89,7 +89,7 @@ Using binaries with Nix
 
 .. note:: 
   
-  For read access to private caches you'll also need to run ``cachix authtoken XXX`` or export `$CACHIX_AUTH_TOKEN`
+  For read access to private caches you'll also need to run ``cachix authtoken XXX`` or `export CACHIX_AUTH_TOKEN=xxx`
   before invoking ``cachix use`` in order to configure :term:`access token`,
   to be used for authenticating using netrc file.
 
