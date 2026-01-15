@@ -46,6 +46,9 @@ b) Per-cache
 
     b) ``$ export CACHIX_AUTH_TOKEN=XXX``
 
+.. tip::
+
+    Run ``cachix doctor`` to verify your configuration and authentication are set up correctly.
 
 Signing key (advanced)
 ---------------------------

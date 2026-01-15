@@ -1,6 +1,14 @@
 Frequently Asked Questions
 ==========================
 
+Troubleshooting configuration and authentication
+------------------------------------------------
+
+If you're experiencing issues with configuration or authentication,
+run ``cachix doctor`` (available since version 1.10) to diagnose common problems::
+
+    $ cachix doctor
+
 What Nix versions are supported?
 --------------------------------
 
