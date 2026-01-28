@@ -3,12 +3,6 @@
 Cachix Deploy 
 =============
 
-.. note:: 
-   
-   Cachix Deploy is in public beta. This means you won't be charged, as we
-   are gathering feedback.
-        
-
 `Cachix Deploy <https://app.cachix.org/deploy/>`_ provides continuous deployments to a Nix profile 
 (like `NixOS <https://nixos.org>`_, `nix-darwin <https://github.com/LnL7/nix-darwin>`_ or `Home Manager <https://github.com/nix-community/home-manager>`_) using a pull model.
 

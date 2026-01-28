@@ -23,8 +23,6 @@ Alternatively, you can roll your own binary cache, but some of the features won'
 Create a workspace
 ------------------
 
-.. note :: As part of the public beta, you can create only one workspace.
-
 Workspace is a set of agents you can deploy to. 
 
 Start by `creating a workspace <https://app.cachix.org/deploy/>`_.
