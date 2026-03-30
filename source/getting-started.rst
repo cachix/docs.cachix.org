@@ -12,16 +12,24 @@ you can cache any Nix build result.
 After logging into `Cachix <https://app.cachix.org>`_
 you'll be able to create a new binary cache.
 
-It's recommended to setup new binary caches **per trust model**,
-depending on who are the users that will have write access and
-the same for read access.
+Organizing your caches
+~~~~~~~~~~~~~~~~~~~~~~
 
-Most teams will have one private and one public cache.
+Create separate caches based on **who has write access** and **who needs read access**.
+A single cache should group store paths that share the same trust boundary.
 
-Public caches have read access open to everyone.
+Most teams use two caches:
 
-If you'd like to keep your **binaries protected from public access**,
-make sure to create a private cache. 
+- A **public cache** for open source projects. Anyone on the internet can pull from it, but only authorized users can push.
+- A **private cache** for proprietary software. Both read and write access require authentication.
+
+Common patterns:
+
+- **One cache per team or organization**: all members push to and pull from the same cache. Simple to manage, works well when everyone trusts each other.
+- **Separate caches per project**: useful when different projects have different contributors or access requirements.
+- **Separate caches for CI and development**: CI pushes to a shared cache, while experimental or local builds go into a different one to avoid polluting the main cache.
+
+Choose a descriptive name for your cache (e.g. ``myorg``, ``myorg-private``, ``myproject``) since the name appears in your Nix configuration and is visible to anyone using it.
 
 
 Authenticating
