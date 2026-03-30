@@ -16,12 +16,8 @@ Organizing your caches
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Create separate caches based on **who has write access** and **who needs read access**.
-A single cache should group store paths that share the same trust boundary.
-
-Most teams use two caches:
-
-- A **public cache** for open source projects. Anyone on the internet can pull from it, but only authorized users can push.
-- A **private cache** for proprietary software. Both read and write access require authentication.
+Most teams use a **public cache** for open source projects and a **private cache** for proprietary software.
+See :doc:`security` for details on access control.
 
 Common patterns:
 
