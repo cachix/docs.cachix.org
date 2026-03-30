@@ -15,6 +15,7 @@ Topics
    :maxdepth: 3
    :glob:
 
+   what-is-a-binary-cache.rst
    installation.rst
    getting-started.rst
    continuous-integration-setup/index.rst
