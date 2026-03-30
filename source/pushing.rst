@@ -62,7 +62,7 @@ Push all store paths produced during a command
 Flakes
 ------
 
-Assuming `you're familiar with experimental Flakes support <https://www.tweag.io/blog/2020-05-25-flakes/>`_.
+Assuming `you're familiar with Flakes <https://nix.dev/concepts/flakes>`_.
 
 
 Pushing flake inputs

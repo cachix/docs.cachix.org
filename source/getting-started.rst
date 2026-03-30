@@ -83,7 +83,7 @@ Assuming you have a project with ``default.nix`` you can build it and push::
 
 It's recommended to set up :ref:`Continuous Integration to push <getting-started-ci>` for every branch of every project.
 
-See :ref:`all differents ways of pushing <pushing>`.
+See :ref:`all different ways of pushing <pushing>`.
 
 
 

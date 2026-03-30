@@ -50,19 +50,19 @@ If the entry exists:
        that you first need to add cachix configuration and run ``nixos-rebuild switch`` and only after the
        next run of ``nixos-rebuild switch`` binary caches would be used.
 
-If the entry does not exists:
+If the entry does not exist:
 
     1. Check if the entry that you expected has a different hash.
      
        You can compare the difference between two derivations via ``nix-shell -p nix-diff --run "nix-diff drv1 drv"``.
 
        In order to have both derivations available locally you can run ``nix-instantiate default.nix | cachix push mycache``
-       to push the dervation into Cachix and then run ``nix-store -r /nix/store/hash.drv`` to retrieve it on another machine.
+       to push the derivation into Cachix and then run ``nix-store -r /nix/store/hash.drv`` to retrieve it on another machine.
 
        Common reason for derivation hash differences are `described in language anti-patterns <https://nix.dev/recipes/best-practices#reproducible-source-paths>`_.
 
     2. Maybe ``cachix push`` got interrupted and the whole dependency tree is not available from Cachix.
-       In that case push again retry to make sure everything is uploaded.
+       In that case push again to make sure everything is uploaded.
        
     3. If the same store hash is available in https://cache.nixos.org it will count as existing upstream and won't be present in cachix
 

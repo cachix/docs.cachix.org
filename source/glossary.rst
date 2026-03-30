@@ -8,7 +8,7 @@ Glossary
     store hash in binary cache API.
 
   nar archive
-    Deterministic arhive alternative to other archives like tar.
+    Deterministic archive alternative to other archives like tar.
     
     See `specification <https://gist.github.com/jbeda/5c79d2b1434f0018d693>`_.
 
