@@ -18,13 +18,13 @@ Topics
    what-is-a-binary-cache.rst
    installation.rst
    getting-started.rst
-   continuous-integration-setup/index.rst
-   importing-from-s3.rst
-   deploy/index.rst
    pushing.rst
+   continuous-integration-setup/index.rst
    garbage-collection.rst
    pins.rst
    security.rst
+   deploy/index.rst
    enterprise/index.rst
+   importing-from-s3.rst
    faq.rst
    glossary.rst
