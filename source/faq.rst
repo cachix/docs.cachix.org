@@ -155,11 +155,6 @@ point Cachix at your certificate bundle using one of the following environment v
 ``SSL_CERT_DIR``
     Path to a directory of PEM certificates (each file must contain a single certificate).
 
-``SYSTEM_CERTIFICATE_PATH``
-    Path to a directory of PEM certificates. Useful when running as a user without
-    root privileges on systems where the default trust store is not readable or not
-    in a standard location.
-
 Example:
 
 .. code:: shell-session
