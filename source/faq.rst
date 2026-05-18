@@ -138,3 +138,30 @@ For cache authentication tokens:
 .. code:: shell-session
 
     $ curl -s --netrc-file ~/.config/nix/netrc https://mycache.cachix.org/nix-cache-info
+
+
+How do I supply a custom CA certificate?
+----------------------------------------
+
+By default, Cachix loads trusted certificates from the system store
+(``/etc/ssl/certs`` on Linux, the keychain on macOS, the system store on Windows).
+
+If you are behind a TLS intercepting corporate proxy or use your own certificate authority,
+point Cachix at your certificate bundle using one of the following environment variables:
+
+``SSL_CERT_FILE``
+    Path to a PEM bundle containing one or more trusted certificates.
+
+``SSL_CERT_DIR``
+    Path to a directory of PEM certificates (each file must contain a single certificate).
+
+Example:
+
+.. code:: shell-session
+
+    $ export SSL_CERT_FILE=/path/to/corporate-ca-bundle.pem
+    $ cachix push mycache ./result
+
+Note that ``cachix`` does not currently read ``NIX_SSL_CERT_FILE``.
+If you have configured Nix with ``NIX_SSL_CERT_FILE``, set ``SSL_CERT_FILE``
+to the same path so that ``cachix`` uses the same trust store.
