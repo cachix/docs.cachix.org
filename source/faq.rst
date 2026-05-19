@@ -1,18 +1,24 @@
 Frequently Asked Questions
 ==========================
 
-Troubleshooting configuration and authentication
-------------------------------------------------
+First step for any problem: run ``cachix doctor``
+-------------------------------------------------
 
-If you're experiencing issues with configuration or authentication,
-run ``cachix doctor`` (available since version 1.10) to diagnose common problems::
+Before working through the questions below, run ``cachix doctor`` (available since version 1.10).
+It inspects your installation, configuration, and authentication, and reports the most common
+misconfigurations along with a suggested fix::
 
     $ cachix doctor
+
+If ``cachix doctor`` reports everything is healthy and you still see a problem, continue with the
+questions below.
 
 What Nix versions are supported?
 --------------------------------
 
-Cachix supports Nix 2.0.2 or higher. Nix 2.3.5 or higher is recommended.
+We test against the current stable Nix release and the most recent NixOS release branches.
+In practice this means Nix 2.18 (the long-term-support series) or newer.
+Older Nix versions may still work, but are not actively tested and security fixes will not be backported for them.
 
 
 Does pushing a store path override an existing entry?

@@ -14,12 +14,12 @@ Buildkite
       CACHE_NAME: mycache
 
     steps:
-    - label: Set up Cachix
+      - label: "Set up Cachix"
         commands:
-        - nix-env -iA nixpkgs.cachix
-        - cachix use $CACHE_NAME
-    - wait
-    - label: Build
+          - nix-env -iA nixpkgs.cachix
+          - cachix use $CACHE_NAME
+      - wait
+      - label: "Build"
         commands:
-        - cachix watch-exec $CACHE_NAME nix-build
-        - cachix watch-exec $CACHE_NAME -- nix-shell --run "echo nix-shell successfully entered"
+          - cachix watch-exec $CACHE_NAME nix-build
+          - cachix watch-exec $CACHE_NAME -- nix-shell --run "echo nix-shell successfully entered"

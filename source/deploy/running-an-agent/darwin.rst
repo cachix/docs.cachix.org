@@ -23,5 +23,5 @@ Continue by :ref:`making your first deployment for your agent <deploying-to-agen
 
 If you need to troubleshoot:
 
-- If the agent doesn't start, check `tail -f /var/log/cachix-agent.log`.
-- If you want to restart the agent, run `sudo launchctl kickstart -k system/org.nixos.cachix-agent`
+- If the agent doesn't start, check ``tail -f /var/log/cachix-agent.log``.
+- If you want to restart the agent, run ``sudo launchctl kickstart -k system/org.nixos.cachix-agent``.

@@ -5,7 +5,12 @@ import datetime
 
 # -- General configuration ------------------------------------------------
 
-extensions = []
+extensions = [
+    "sphinx_copybutton",
+]
+
+copybutton_prompt_text = r"^\$ |^> |^In \[\d*\]: "
+copybutton_prompt_is_regexp = True
 
 templates_path = ['_templates']
 
