@@ -7,7 +7,6 @@ build_docs = shell("make html")
 print("Doing an initial build of the docs...")
 build_docs()
 
-server.watch("source/*", build_docs)
 server.watch("source/**/*", build_docs)
 server.watch("_templates/*.html", build_docs)
 server.serve(root="build/html")

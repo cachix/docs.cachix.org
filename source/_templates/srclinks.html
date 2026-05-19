@@ -1,14 +1,15 @@
 {%- if show_source and has_source and sourcename %}
+{%- set src = ('source/' + sourcename).replace('.txt', '') %}
 <div class="widget navlinks">
   <h3>{{ _('This Page') }}</h3>
   <ul class="this-page-menu">
-    <li><a href="https://github.com/cachix/docs.cachix.org/edit/master/{{ ('source/' + sourcename).replace('.txt','') }}"
+    <li><a href="https://github.com/cachix/docs.cachix.org/edit/master/{{ src }}"
             rel="nofollow"
             target="_blank">{{ _('Edit this page') }}</a></li>
-    <li><a href="https://github.com/cachix/docs.cachix.org/commits/master/{{ ('source/' + sourcename).replace('.txt','') }}"
+    <li><a href="https://github.com/cachix/docs.cachix.org/commits/master/{{ src }}"
             rel="nofollow"
             target="_blank">{{ _('Page history') }}</a></li>
-    <li><a href="https://github.com/cachix/docs.cachix.org/raw/master/{{ ('source/' + sourcename).replace('.txt','') }}"
+    <li><a href="https://github.com/cachix/docs.cachix.org/raw/master/{{ src }}"
             rel="nofollow"
             target="_blank">{{ _('Source') }}</a></li>
   </ul>
