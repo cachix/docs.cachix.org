@@ -48,7 +48,6 @@ html_theme_options = {
     "github_user": "cachix",
     "github_repo": "docs.cachix.org",
     "github_type": "star",
-    "fixed_sidebar": True,
     "github_banner": True,
 }
 
