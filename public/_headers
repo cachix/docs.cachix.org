@@ -1,0 +1,8 @@
+# Revalidate documents and Pagefind's stable URLs on every visit. Explicit
+# no-cache also protects them from the zone's four-hour browser cache minimum.
+/*
+  Cache-Control: public, no-cache, max-age=0, must-revalidate
+
+# Astro's fingerprinted assets can retain the host's normal cache policy.
+/_astro/*
+  ! Cache-Control
