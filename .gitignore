@@ -1,4 +1,11 @@
 result
 build/
-
-
+dist/
+node_modules/
+.astro/
+.devenv/
+.venv/
+.env
+test-results/
+playwright-report/
+.wrangler/

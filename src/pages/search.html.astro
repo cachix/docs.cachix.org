@@ -1,0 +1,27 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import '@pagefind/default-ui/css/ui.css';
+---
+<StarlightPage frontmatter={{ title: 'Search', description: 'Search Cachix documentation.', tableOfContents: false, pagefind: false }}>
+  <div id="docs-search"></div>
+  <noscript>Enable JavaScript to search, or browse the documentation using the navigation.</noscript>
+</StarlightPage>
+
+<script>
+  import { PagefindUI } from '@pagefind/default-ui';
+
+  const search = new PagefindUI({
+    element: '#docs-search',
+    bundlePath: '/pagefind/',
+    showImages: false,
+    showSubResults: true,
+    processResult: (result) => {
+      result.url = result.url.replace(/(.)\/(#.*)?$/, '$1$2');
+      result.sub_results?.forEach((sub) => { sub.url = sub.url.replace(/(.)\/(#.*)?$/, '$1$2'); });
+      return result;
+    },
+  });
+  // Preserve links from the old Sphinx search form, including ?q= queries.
+  const query = new URLSearchParams(window.location.search).get('q');
+  if (query) search.triggerSearch(query);
+</script>

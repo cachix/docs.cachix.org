@@ -1,0 +1,33 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+
+// A literal .html route prevents Astro from treating the extension as optional.
+export async function getStaticPaths() {
+  const entries = await getCollection('docs');
+  return entries.filter((entry) => entry.id.endsWith('.html')).map((entry) => ({
+    params: {
+      directory: entry.id.includes('/') ? entry.id.slice(0, entry.id.lastIndexOf('/')) : undefined,
+      page: entry.id.slice(entry.id.lastIndexOf('/') + 1, -5),
+    },
+    props: { entry },
+  }));
+}
+
+interface Props { entry: CollectionEntry<'docs'> }
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const editUrl = entry.data.editUrl === false ? false
+  : `https://github.com/cachix/docs.cachix.org/edit/master/${entry.filePath}`;
+---
+
+<StarlightPage frontmatter={{
+  title: entry.data.title,
+  description: entry.data.description,
+  tableOfContents: entry.data.tableOfContents,
+  pagefind: entry.data.pagefind,
+  head: entry.data.head,
+  editUrl,
+}} {headings}>
+  <Content />
+</StarlightPage>

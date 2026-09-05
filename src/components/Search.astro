@@ -1,0 +1,20 @@
+---
+import Default from '@astrojs/starlight/components/Search.astro';
+---
+<Default {...Astro.props} />
+
+<script>
+  // Search loads on idle. If the dialog opens first, focus its input once
+  // Pagefind has inserted it, so keyboard users can start typing immediately.
+  for (const search of document.querySelectorAll('site-search')) {
+    const observer = new MutationObserver(focusWhenReady);
+    function focusWhenReady() {
+      const input = search.querySelector('input');
+      if (!input) return;
+      observer.disconnect();
+      if (search.querySelector('dialog')?.open) input.focus();
+    }
+    observer.observe(search, { childList: true, subtree: true });
+    focusWhenReady();
+  }
+</script>

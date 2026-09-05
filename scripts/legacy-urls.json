@@ -1,0 +1,285 @@
+{
+  "/continuous-integration-setup/buildkite.html": {
+    "title": "Buildkite",
+    "ids": [
+      "buildkite"
+    ]
+  },
+  "/continuous-integration-setup/circleci.html": {
+    "title": "CircleCI",
+    "ids": [
+      "circleci"
+    ]
+  },
+  "/continuous-integration-setup/github-actions.html": {
+    "title": "GitHub Actions (recommended)",
+    "ids": [
+      "github-actions-recommended"
+    ]
+  },
+  "/continuous-integration-setup/gitlab.html": {
+    "title": "GitLab CI",
+    "ids": [
+      "gitlab-ci"
+    ]
+  },
+  "/continuous-integration-setup/hercules-ci.html": {
+    "title": "Hercules CI",
+    "ids": [
+      "hercules-ci"
+    ]
+  },
+  "/continuous-integration-setup/hydra.html": {
+    "title": "Hydra",
+    "ids": [
+      "hydra"
+    ]
+  },
+  "/continuous-integration-setup/index.html": {
+    "title": "Getting Started With Continuous Integration",
+    "ids": [
+      "getting-started-ci",
+      "getting-started-with-continuous-integration"
+    ]
+  },
+  "/continuous-integration-setup/travis-ci.html": {
+    "title": "Travis CI",
+    "ids": [
+      "travis-ci"
+    ]
+  },
+  "/deploy/deploying-to-agents/index.html": {
+    "title": "Deploying to agents",
+    "ids": [
+      "activate-the-deployment",
+      "deploying-to-agents",
+      "get-deploy-activate-auth-token",
+      "home-manager",
+      "id1",
+      "nix-darwin",
+      "nixos",
+      "prerequisites",
+      "simple-nix-profile",
+      "write-deploy-specification"
+    ]
+  },
+  "/deploy/index.html": {
+    "title": "Cachix Deploy",
+    "ids": [
+      "cachix-deploy",
+      "id1"
+    ]
+  },
+  "/deploy/reference.html": {
+    "title": "Reference",
+    "ids": [
+      "deploy-json",
+      "id1",
+      "reference"
+    ]
+  },
+  "/deploy/running-an-agent/darwin.html": {
+    "title": "nix-darwin",
+    "ids": [
+      "nix-darwin",
+      "running-darwin-agent"
+    ]
+  },
+  "/deploy/running-an-agent/home-manager.html": {
+    "title": "Home Manager",
+    "ids": [
+      "home-manager",
+      "running-home-manager-agent"
+    ]
+  },
+  "/deploy/running-an-agent/index.html": {
+    "title": "Running an agent",
+    "ids": [
+      "create-a-binary-cache",
+      "create-a-workspace",
+      "generate-agent-token",
+      "id1",
+      "id3",
+      "prerequisites",
+      "running-an-agent",
+      "starting-an-agent"
+    ]
+  },
+  "/deploy/running-an-agent/manually.html": {
+    "title": "Simple Nix profile",
+    "ids": [
+      "running-simple-agent",
+      "simple-nix-profile"
+    ]
+  },
+  "/deploy/running-an-agent/nixos.html": {
+    "title": "NixOS",
+    "ids": [
+      "nixos",
+      "running-nixos-agent"
+    ]
+  },
+  "/deploy/troubleshooting.html": {
+    "title": "Troubleshooting",
+    "ids": [
+      "changing-agent-name",
+      "id1",
+      "troubleshooting"
+    ]
+  },
+  "/enterprise/index.html": {
+    "title": "Enterprise",
+    "ids": [
+      "enterprise",
+      "id1"
+    ]
+  },
+  "/enterprise/telemetry.html": {
+    "title": "Telemetry",
+    "ids": [
+      "span-attributes",
+      "telemetry"
+    ]
+  },
+  "/faq.html": {
+    "title": "Frequently Asked Questions",
+    "ids": [
+      "are-entries-immediately-available-after-they-are-pushed",
+      "cachix-use-effects",
+      "does-pushing-a-store-path-override-an-existing-entry",
+      "first-step-for-any-problem-run-cachix-doctor",
+      "frequently-asked-questions",
+      "how-can-i-check-if-my-auth-token-works",
+      "how-do-i-supply-a-custom-ca-certificate",
+      "how-to-disable-binary-caches-when-working-offline",
+      "i-get-invalidpath-error-from-nix-when-invoking-cachix",
+      "is-there-a-way-to-cache-nix-shell",
+      "warning-https-mycache-cachix-org-does-not-appear-to-be-a-binary-cache",
+      "what-happens-when-i-run-cachix-use-both-immediately-and-any-stateful-effects-for-the-future",
+      "what-nix-versions-are-supported",
+      "why-is-nix-not-picking-up-on-any-of-the-pre-built-artifacts"
+    ]
+  },
+  "/garbage-collection.html": {
+    "title": "Garbage Collection",
+    "ids": [
+      "deletion-algorithm",
+      "garbage-collection",
+      "id1"
+    ]
+  },
+  "/getting-started.html": {
+    "title": "Getting Started",
+    "ids": [
+      "authenticating",
+      "creating-the-cache",
+      "getting-started",
+      "id1",
+      "organizing-your-caches",
+      "pushing-binaries-with-cachix",
+      "signing-key-advanced",
+      "using-binaries-with-nix"
+    ]
+  },
+  "/glossary.html": {
+    "title": "Glossary",
+    "ids": [
+      "glossary",
+      "term-access-token",
+      "term-agent",
+      "term-binary-cache",
+      "term-nar-archive",
+      "term-narinfo",
+      "term-signing-key",
+      "term-store-path"
+    ]
+  },
+  "/importing-from-s3.html": {
+    "title": "Importing from S3",
+    "ids": [
+      "important-notes",
+      "importing-cache-from-s3",
+      "importing-from-s3",
+      "overview",
+      "prerequisites",
+      "step-1-configure-aws-credentials",
+      "step-2-cachix-installation",
+      "step-3-start-the-import-process"
+    ]
+  },
+  "/index.html": {
+    "title": "Welcome to Cachix documentation",
+    "ids": [
+      "welcome-to-cachix-documentation"
+    ]
+  },
+  "/installation.html": {
+    "title": "Installation",
+    "ids": [
+      "flakes",
+      "id1",
+      "installation",
+      "recommended",
+      "using-nixpkgs-or-nixos"
+    ]
+  },
+  "/pins.html": {
+    "title": "Pins",
+    "ids": [
+      "controlling-retention-with-pins",
+      "examples",
+      "exposing-files-with-artifacts",
+      "how-to-create-a-pin",
+      "id1",
+      "overview",
+      "pins"
+    ]
+  },
+  "/pushing.html": {
+    "title": "Pushing to Cachix",
+    "ids": [
+      "flakes",
+      "id1",
+      "push-all-store-paths-produced-during-a-command",
+      "pushing",
+      "pushing-all-newly-built-store-paths",
+      "pushing-build-and-runtime-dependencies",
+      "pushing-flake-inputs",
+      "pushing-runtime-closure",
+      "pushing-runtime-dependencies",
+      "pushing-shell-environment",
+      "pushing-to-cachix",
+      "pushing-whole-nix-store"
+    ]
+  },
+  "/security.html": {
+    "title": "Security",
+    "ids": [
+      "binary-caches",
+      "login-using-github",
+      "secrets",
+      "security"
+    ]
+  },
+  "/what-is-a-binary-cache.html": {
+    "title": "What is a Binary Cache?",
+    "ids": [
+      "how-a-binary-cache-helps",
+      "id1",
+      "the-default-binary-cache",
+      "what-is-a-binary-cache",
+      "where-cachix-fits-in",
+      "without-a-binary-cache"
+    ]
+  },
+  "/genindex.html": {
+    "title": "Index",
+    "ids": [
+      "A",
+      "B",
+      "N",
+      "S",
+      "index"
+    ]
+  }
+}

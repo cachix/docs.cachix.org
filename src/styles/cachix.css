@@ -1,0 +1,56 @@
+@import '@fontsource/mulish/400.css';
+@import '@fontsource/mulish/600.css';
+@import '@fontsource/mulish/700.css';
+
+/* cachix.org uses white surfaces and neutral grays, with blue as an accent. */
+:root,
+:root[data-theme='light'] {
+  color-scheme: light;
+  --sl-font: 'Mulish', sans-serif;
+  --sl-color-accent-low: #f3f4f6;
+  --sl-color-accent: #2856a0;
+  --sl-color-accent-high: #0c192f;
+  --sl-color-white: #0c192f;
+  --sl-color-gray-1: #1f2937;
+  --sl-color-gray-2: #374151;
+  --sl-color-gray-3: #6b7280;
+  --sl-color-gray-4: #9ca3af;
+  --sl-color-gray-5: #e5e7eb;
+  --sl-color-gray-6: #f3f4f6;
+  --sl-color-gray-7: #f9fafb;
+  --sl-color-black: #fff;
+  --sl-color-bg: #fff;
+  --sl-color-bg-nav: #fff;
+  --sl-color-bg-sidebar: #fff;
+  --sl-color-text-accent: #2856a0;
+  --sl-color-hairline-light: #e5e7eb;
+  --sl-nav-height: 5rem;
+  --csk-accent: #2856a0;
+  --csk-accent-strong: #0c192f;
+  --csk-font: var(--sl-font);
+  --csk-navbar-font: var(--sl-font);
+  --csk-radius: 0.375rem;
+}
+
+.cachix-brand { display: flex; align-items: center; }
+.cachix-brand a { display: flex; align-items: center; text-decoration: none; }
+.cachix-brand img { width: 8.125rem; height: auto; }
+.header { border-bottom-color: var(--sl-color-hairline-light); }
+.csk-navbar-extra { font-family: var(--sl-font); font-weight: 600; color: var(--sl-color-white); }
+.cachix-signup { --csk-navbar-action-height: 2.625rem; background: #2856a0; color: #fff; border-radius: 0.375rem; margin-inline: 0.5rem; padding: 0.5rem 1rem; align-self: center; }
+.cachix-signup:hover { background: #204780; color: #fff; }
+.sidebar-content a[aria-current='page'] { background: var(--sl-color-gray-6); color: var(--sl-color-white); font-weight: 700; }
+.sidebar-content a { border-radius: 0.375rem; }
+h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.025em; }
+.sl-markdown-content a { text-underline-offset: 0.2em; }
+.sl-markdown-content :is(table, pre) { font-variant-ligatures: none; }
+.sl-markdown-content dt { font-weight: 700; color: var(--sl-color-white); }
+.sl-markdown-content dd { margin-inline-start: 1.5rem; }
+.legacy-anchor { scroll-margin-top: calc(var(--sl-nav-height) + 2rem); }
+.csk-footer { margin-top: 3rem; border-top: 1px solid var(--sl-color-hairline-light); }
+
+@media (max-width: 49.99rem) {
+  :root, :root[data-theme='light'] { --sl-nav-height: 4rem; }
+  starlight-menu-button button { display: flex; align-items: center; justify-content: center; }
+  .cachix-brand img { width: 6rem; }
+}

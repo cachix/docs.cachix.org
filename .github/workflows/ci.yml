@@ -11,6 +11,25 @@ jobs:
     - uses: cachix/install-nix-action@V28
     - name: Build
       run: nix-build
-    - name: Link check
-      run: nix-shell --run "make linkcheck"
+    # The Nix build checks Astro types, internal links, and legacy URLs.
 
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - uses: actions/setup-node@v6
+      with:
+        node-version-file: .nvmrc
+        cache: npm
+    - run: npm ci
+    - run: npx playwright install --with-deps chromium
+    - run: npm run build
+    - run: npm run check:browser
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: browser-report
+        path: |
+          playwright-report/
+          test-results/
+        retention-days: 14

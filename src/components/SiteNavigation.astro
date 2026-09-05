@@ -1,0 +1,18 @@
+---
+import Navbar from '@cachix/site-kit/starlight/Navbar.astro';
+import NavbarLink from '@cachix/site-kit/ui/NavbarLink.astro';
+---
+<Navbar
+  blog={false}
+  docs={false}
+  rss={false}
+  version={false}
+  metadataEndpoint={false}
+>
+  <NavbarLink href="https://blog.cachix.org">Blog</NavbarLink>
+  <NavbarLink href="https://www.cachix.org/enterprise">Enterprise</NavbarLink>
+  <NavbarLink href="https://www.cachix.org/pricing">Pricing</NavbarLink>
+  <NavbarLink href="https://www.cachix.org/about">About</NavbarLink>
+  <NavbarLink href="https://www.cachix.org/login">Log in</NavbarLink>
+  <a href="https://www.cachix.org/signup" class="csk-navbar-extra cachix-signup">Sign up</a>
+</Navbar>

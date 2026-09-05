@@ -1,1 +1,3 @@
-nix-shell --run "python live.py"
+#!/usr/bin/env bash
+set -euo pipefail
+exec nix-shell --run "npm run dev -- --host 127.0.0.1"
