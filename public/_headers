@@ -1,5 +1,5 @@
-# Revalidate documents and Pagefind's stable URLs on every visit. Explicit
-# no-cache also protects them from the zone's four-hour browser cache minimum.
+# Request revalidation for documents and Pagefind's stable URLs. The custom
+# domain's Cloudflare cache rule must respect these origin headers (see README).
 /*
   Cache-Control: public, no-cache, max-age=0, must-revalidate
 
