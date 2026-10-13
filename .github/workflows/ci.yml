@@ -7,7 +7,7 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - uses: cachix/install-nix-action@V28
     - name: Build
       run: nix-build
