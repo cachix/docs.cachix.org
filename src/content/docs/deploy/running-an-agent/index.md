@@ -17,7 +17,7 @@ You need to [install at least version 0.8.0 of cachix command line client](/inst
 The agent requires a binary cache to download the closure it wants to activate.
 
 You can [create a binary cache](https://app.cachix.org/cache/) with Cachix and
-the your agents will automatically use it.
+then your agents will automatically use it.
 
 Alternatively, you can roll your own binary cache, but some of the features won’t be available.
 
