@@ -33,6 +33,28 @@ $ cachix pin mycache v1.0 /nix/store/xxx-name-1.0
 
 Current pins can be viewed and managed from your cache’s dashboard at `https://app.cachix.org/cache/mycache/pins`.
 
+## Getting Pin Information {#getting-pin-information}
+
+Use `cachix pins get` to retrieve a pin's metadata and latest revision.
+The command uses the existing pin listing API and selects the exact pin name
+locally. It does not require a server upgrade.
+
+```bash
+$ cachix pins get mycache 'mypin:1.0.0'
+$ cachix pins get mycache 'mypin:1.0.0' --json
+```
+
+The JSON output is one object with `name`, `createdOn`, `keep`, and
+`lastRevision`. The latest revision contains `storePath`, `revision`, `createdOn`,
+`artifacts`, and `orphaned`.
+
+Pin names are literal. For example, `mypin:1.0.0` is a pin name, not a revision
+selector. Public caches allow anonymous reads. Private caches require a token
+with read access. A missing pin produces a nonzero exit status.
+
+If `orphaned` is `true`, the cache no longer has the store path metadata for that
+revision. Its `storePath` lacks the name suffix and its artifact links are unavailable.
+
 ## Controlling Retention with Pins {#controlling-retention-with-pins}
 
 Pins maintain a history of revisions for each pin name. A new revision is created every time a store path is pinned with the same name.

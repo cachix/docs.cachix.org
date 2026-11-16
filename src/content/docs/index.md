@@ -53,6 +53,7 @@ or at [support@cachix.org](mailto:support%40cachix.org).
 - [Pins](/pins.html)
   - [Overview](/pins.html#overview)
   - [How to Create a Pin](/pins.html#how-to-create-a-pin)
+  - [Getting Pin Information](/pins.html#getting-pin-information)
   - [Controlling Retention with Pins](/pins.html#controlling-retention-with-pins)
   - [Exposing Files with Artifacts](/pins.html#exposing-files-with-artifacts)
   - [Examples](/pins.html#examples)
