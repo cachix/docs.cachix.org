@@ -8,9 +8,7 @@ slug: "pins.html"
 
 <span id="pins" class="legacy-anchor"></span>
 
-Added in version 1.5.
-
-## Overview {#overview}
+<span id="overview" class="legacy-anchor"></span>
 
 Pins are a feature in Cachix that let you assign a persistent name to a store path.
 
@@ -22,16 +20,59 @@ Pins are useful for:
 - Exposing files from within a store path.
 - Controlling the retention of certain store paths.
 
-## How to Create a Pin {#how-to-create-a-pin}
+## Roots and dependency closures
 
-1. **Choose a name for your pin** - This could be anything, but we recommend choosing something meaningful, like the tool’s name, version, git revision, or some combination of them all. For example, `v1.7`.
-2. **Pin a store path in a cache** - Use the `cachix pin` command followed by the name of your cache, your chosen pin name, and the store path you want to pin.
+<!-- TODO: Use a release output to show which runtime dependencies its pin protects and how long that protection lasts. -->
 
-```bash
-$ cachix pin mycache v1.0 /nix/store/xxx-name-1.0
+The store path you pin is the **root** of a revision.
+Its **closure** includes the root and every store path reachable through its references.
+For example, pinning an application protects the application, the library it loads, and the libraries that library needs.
+A compiler used only at build time falls outside this closure.
+
+For a project with a `default.nix`, build the release and list its closure.
+
+```console
+$ nix-build
+$ nix-store --query --requisites ./result
 ```
 
-Current pins can be viewed and managed from your cache’s dashboard at `https://app.cachix.org/cache/mycache/pins`.
+Each retained revision protects its closure.
+If two releases use the same library, expiring the older revision still leaves the library protected by the newer one.
+
+## Pins and upstreams
+
+You can pin a release even if its root exists only in a direct Cachix upstream.
+Write access to the destination is sufficient.
+Cachix checks the root and its dependencies against the destination and its [eligible upstreams](/upstreams.html#limitations).
+If a required path is missing, pin creation fails and any previous revision stays in place.
+
+Cachix retains the selected upstream paths in the destination and reuses their stored archives.
+These paths count toward the destination’s pinned storage and remain available if you remove or delete the source cache.
+Pins that share a dependency in the same cache count that dependency once.
+
+A managed destination signs the retained paths with its own key.
+A self-signed destination keeps the original signatures and continues to advertise their public keys, even after you remove the upstream.
+
+A dependency known to exist on a configured `cache.nixos.org` can satisfy the closure check without being copied.
+Clients still fetch it from NixOS.
+The pin root itself must have store path metadata in the destination or a direct Cachix upstream.
+
+## How to Create a Pin {#how-to-create-a-pin}
+
+For a project that builds with `nix-build`, the following commands publish a release and name it `stable`.
+Replace `MY_CACHE` with your destination cache.
+
+```console
+$ nix-build
+$ cachix push MY_CACHE ./result
+$ cachix pin MY_CACHE stable ./result --keep-revisions 3
+$ cachix pins get MY_CACHE stable
+```
+
+The push skips paths already available upstream.
+The pin retains the release in `MY_CACHE`.
+Reuse the name `stable` for the next release to keep its three most recent revisions.
+Open the **Pins** tab in your cache’s dashboard to view or manage them.
 
 ## Getting Pin Information {#getting-pin-information}
 
@@ -40,8 +81,8 @@ The command uses the existing pin listing API and selects the exact pin name
 locally. It does not require a server upgrade.
 
 ```bash
-$ cachix pins get mycache 'mypin:1.0.0'
-$ cachix pins get mycache 'mypin:1.0.0' --json
+$ cachix pins get MY_CACHE 'mypin:1.0.0'
+$ cachix pins get MY_CACHE 'mypin:1.0.0' --json
 ```
 
 The JSON output is one object with `name`, `createdOn`, `keep`, and
@@ -57,8 +98,11 @@ revision. Its `storePath` lacks the name suffix and its artifact links are unava
 
 ## Controlling Retention with Pins {#controlling-retention-with-pins}
 
-Pins maintain a history of revisions for each pin name. A new revision is created every time a store path is pinned with the same name.
-All revisions are kept indefinitely by default. Use one of these retention policies:
+Pins maintain a history of revisions for each pin name.
+A new revision is created every time a store path is pinned with the same name.
+A new pin keeps all revisions indefinitely by default.
+Adding a revision without a retention option preserves the pin’s current policy.
+To set a policy, choose one of these options:
 
 - `--keep-days N`: Each revision expires N days after it was created, including the latest revision. Cachix deletes the pin when no revisions remain.
 - `--keep-revisions N`: Keep the latest N revisions. These revisions do not expire with time.
@@ -66,19 +110,24 @@ All revisions are kept indefinitely by default. Use one of these retention polic
 To create a pin that expires after 3 days:
 
 ```bash
-$ cachix pin mycache v1.0 /nix/store/xxx-name-1.0 --keep-days 3
+$ cachix pin MY_CACHE v1.0 /nix/store/xxx-name-1.0 --keep-days 3
 ```
 
 If you add no more revisions to `v1.0`, Cachix deletes the pin when the background expiry job runs after those 3 days. If you add another revision with the same name, that revision has its own 3-day lifetime. The pin remains until all its revisions have expired.
 
-Expiry removes the pin's protection from [garbage collection](/garbage-collection.html#garbage-collection). It does not immediately delete the store paths or their files. Paths protected by another pin remain protected.
+Expiry removes the pin's protection from [garbage collection](/garbage-collection.html#garbage-collection).
+A later collection can remove the paths once their last pin expires.
+
+Clearing a cache preserves pinned content.
+To remove protection for every revision in the cache, use **Delete all pins** in the cache settings.
+Unprotected paths then become eligible for collection.
 
 ## Exposing Files with Artifacts {#exposing-files-with-artifacts}
 
 Pins allow you to expose and serve certain files from within a store path. Multiple artifacts can be added with the `--artifact` option when creating a new pin.
 
 ```bash
-$ cachix pin mycache v1.0 /nix/store/xxx-name-1.0 --artifact etc/nginx.conf --artifact bin/name
+$ cachix pin MY_CACHE v1.0 /nix/store/xxx-name-1.0 --artifact etc/nginx.conf --artifact bin/name
 ```
 
 ## Examples {#examples}
@@ -86,6 +135,6 @@ $ cachix pin mycache v1.0 /nix/store/xxx-name-1.0 --artifact etc/nginx.conf --ar
 In the following commands, we pin the `go-1.7` and `go-1.8` store paths:
 
 ```bash
-$ cachix pin mycache go-1.7 /nix/store/nd3ssg3hiqj6ivvkv2n5q7ppdwh0wqcf-go-1.7
-$ cachix pin mycache go-1.8 /nix/store/canq1nwdhxk4d2yj8pgywz7lqhkpyq2d-go-1.8
+$ cachix pin MY_CACHE go-1.7 /nix/store/nd3ssg3hiqj6ivvkv2n5q7ppdwh0wqcf-go-1.7
+$ cachix pin MY_CACHE go-1.8 /nix/store/canq1nwdhxk4d2yj8pgywz7lqhkpyq2d-go-1.8
 ```

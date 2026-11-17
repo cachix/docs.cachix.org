@@ -19,7 +19,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Cachix Docs',
-      description: 'Documentation for Cachix binary cache hosting, Cachix Deploy, and Cachix Server for Enterprise.',
+      description: 'Documentation for Cachix binary cache hosting and Cachix Deploy.',
       favicon: '/favicon.svg',
       head: [
         { tag: 'script', content: 'window.$crisp = []; window.CRISP_WEBSITE_ID = "b2f69f1c-c734-49c6-be77-9e8a58b85e8c";' },
@@ -30,7 +30,6 @@ export default defineConfig({
       editLink: { baseUrl: 'https://github.com/cachix/docs.cachix.org/edit/master/' },
       customCss: ['./src/styles/cachix.css'],
       routeMiddleware: './src/route-data.ts',
-      expressiveCode: { themes: ['github-light'] },
       components: {
         ThemeProvider: './src/components/ThemeProvider.astro',
         ThemeSelect: './src/components/ThemeSelect.astro',
@@ -40,6 +39,7 @@ export default defineConfig({
         SocialIcons: './src/components/SiteNavigation.astro',
       },
       plugins: [siteKitStarlight({
+        terminalCopy: false,
         footer: {
           title: 'Cachix',
           description: 'Never build software twice.',

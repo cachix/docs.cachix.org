@@ -27,7 +27,7 @@ let
     fi
 
     export HOME=/root
-    exec ${pkgs.cachix}/bin/cachix -c /etc/cachix/cachix.dhall push mycache $OUT_PATHS > /tmp/hydra_cachix 2>&1
+    exec ${pkgs.cachix}/bin/cachix -c /etc/cachix/cachix.dhall push MY_CACHE $OUT_PATHS > /tmp/hydra_cachix 2>&1
   '';
 in {
   nix.extraOptions = ''
@@ -42,10 +42,10 @@ in {
    ```text
    { authToken = "XXX" -- this one is needed only for private caches
    , binaryCaches =
-       [ { name = "mycache"
+       [ { name = "MY_CACHE"
          , secretKey = "XXX-SIGNING_KEY"
          }
        ]
    }
    ```
-4. Replace `mycache` in above files with name of your new binary cache
+4. Replace `MY_CACHE` in above files with name of your new binary cache

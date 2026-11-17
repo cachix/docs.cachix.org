@@ -8,7 +8,7 @@ slug: "continuous-integration-setup/circleci.html"
 
 1. Create new binary cache on <https://app.cachix.org/cache> and generate a write auth token.
 2. Follow [circleci documentation to setup environment variable](https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project) to set `$CACHIX_AUTH_TOKEN`.
-3. Replace `mycache` in the following `.circleci/config.yml`:
+3. Replace `MY_CACHE` in the following `.circleci/config.yml`:
 
 ```yaml
 version: 2.1
@@ -24,7 +24,7 @@ jobs:
     docker:
       - image: nixos/nix:2.24.10
         environment:
-          CACHIX_NAME: mycache
+          CACHIX_NAME: MY_CACHE
     steps:
       - checkout
       - run:

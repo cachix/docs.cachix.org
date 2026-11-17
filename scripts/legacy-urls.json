@@ -36,7 +36,7 @@
     ]
   },
   "/continuous-integration-setup/index.html": {
-    "title": "Getting Started With Continuous Integration",
+    "title": "Caching builds in CI",
     "ids": [
       "getting-started-ci",
       "getting-started-with-continuous-integration"
@@ -127,22 +127,8 @@
       "troubleshooting"
     ]
   },
-  "/enterprise/index.html": {
-    "title": "Enterprise",
-    "ids": [
-      "enterprise",
-      "id1"
-    ]
-  },
-  "/enterprise/telemetry.html": {
-    "title": "Telemetry",
-    "ids": [
-      "span-attributes",
-      "telemetry"
-    ]
-  },
   "/faq.html": {
-    "title": "Frequently Asked Questions",
+    "title": "FAQ",
     "ids": [
       "are-entries-immediately-available-after-they-are-pushed",
       "cachix-use-effects",
@@ -208,7 +194,7 @@
     ]
   },
   "/index.html": {
-    "title": "Welcome to Cachix documentation",
+    "title": "Cachix documentation",
     "ids": [
       "welcome-to-cachix-documentation"
     ]

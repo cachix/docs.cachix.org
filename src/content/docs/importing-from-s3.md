@@ -6,9 +6,7 @@ slug: "importing-from-s3.html"
 
 <span id="importing-from-s3" class="legacy-anchor"></span>
 
-Added in version 1.7.
-
-## Overview {#overview}
+<span id="overview" class="legacy-anchor"></span>
 
 When transitioning to Cachix, it’s common practice to migrate your existing binary caches.
 
@@ -46,16 +44,16 @@ To import the binary cache from your S3 bucket to Cachix, use the following comm
 Syntax:
 
 ```console
-$ cachix import <cache-name> s3://<bucket-name>?endpoint=<uri>&region=<region>
+$ cachix import MY_CACHE s3://<bucket-name>?endpoint=<uri>&region=<region>
 ```
 
 Example:
 
 ```console
-$ cachix import mycache s3://mybucket
+$ cachix import MY_CACHE s3://mybucket
 ```
 
-Replace `<cache-name>` with your Cachix cache name and `<bucket-name>` with your S3 bucket name.
+Replace `MY_CACHE` with your Cachix cache name and `<bucket-name>` with your S3 bucket name.
 
 ## Important Notes {#important-notes}
 

@@ -53,7 +53,7 @@ With Cachix, you can:
 A typical workflow looks like this:
 
 1. CI builds your project and pushes the result to your Cachix binary cache.
-2. Developers run `cachix use mycache` to configure Nix to pull from your cache.
+2. Developers run `cachix use MY_CACHE` with your cache name to configure Nix to pull from it.
 3. Nix automatically downloads prebuilt artifacts instead of rebuilding.
 
 To get started, see [Installation](/installation.html#installation) and [Getting Started](/getting-started.html#getting-started).

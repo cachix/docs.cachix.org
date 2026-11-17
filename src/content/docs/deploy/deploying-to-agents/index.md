@@ -179,12 +179,13 @@ The following deploys a standalone Home Manager to the agent named
 
 ## Activate the deployment {#activate-the-deployment}
 
-Assuming you’ve created a binary cache called `mycache`:
+Replace `MY_CACHE` with the name of the binary cache you created.
+You’ll need two tokens:
 
 - you have a write token to replace `CACHE-TOKEN`
 - previously generated token to replace `ACTIVATE-TOKEN`.
 
-The following snippet will build your machine, push binaries to `mycache`
+The following snippet will build your machine, push binaries to your cache
 and deploy your agent:
 
 ```text
@@ -192,6 +193,6 @@ export CACHIX_ACTIVATE_TOKEN=ACTIVATE-TOKEN
 export CACHIX_AUTH_TOKEN=CACHE-TOKEN
 
 spec=$(nix build --print-out-paths)
-cachix push mycache $spec
+cachix push MY_CACHE $spec
 cachix deploy activate $spec
 ```

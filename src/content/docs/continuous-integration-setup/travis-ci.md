@@ -7,7 +7,7 @@ slug: "continuous-integration-setup/travis-ci.html"
 <span id="travis-ci" class="legacy-anchor"></span>
 
 1. Create new binary cache on <https://app.cachix.org/cache> and generate a write auth token.
-2. Replace `mycache` in the following `.travis.yml`:
+2. Replace `MY_CACHE` in the following `.travis.yml`:
 
 ```yaml
 language: nix
@@ -15,7 +15,7 @@ nix: 2.3.7
 sudo: false
 env:
   global:
-  - CACHIX_CACHE=mycache
+  - CACHIX_CACHE=MY_CACHE
 install:
 - echo "trusted-users = $USER" | sudo tee -a /etc/nix/nix.conf
 - sudo systemctl restart nix-daemon

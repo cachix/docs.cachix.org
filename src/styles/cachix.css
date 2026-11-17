@@ -1,6 +1,7 @@
 @import '@fontsource/mulish/400.css';
 @import '@fontsource/mulish/600.css';
 @import '@fontsource/mulish/700.css';
+@import '@cachix/site-kit/terminal-copy/styles.css';
 
 /* cachix.org uses white surfaces and neutral grays, with blue as an accent. */
 :root,

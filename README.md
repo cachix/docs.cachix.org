@@ -103,7 +103,7 @@ Cloudflare Pages retains its existing redirects: `/guide.html` redirects to
 `/guide`, and `/deploy/index.html` redirects to `/deploy/`. The hosted check
 compares these redirects, query strings, page headings, and anchors against
 production. Unknown paths now return a proper 404 instead of the existing host's
-200 home-page fallback. Legacy addresses and their deep links remain valid.
+200 home-page fallback. The legacy URL manifest lists the addresses and deep links covered by the compatibility check.
 `/` and `/index.html` share the home page. `/search.html?q=…` and `/genindex.html`
 remain available.
 

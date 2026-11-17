@@ -7,14 +7,14 @@ slug: "continuous-integration-setup/gitlab.html"
 <span id="gitlab-ci" class="legacy-anchor"></span>
 
 1. Create new binary cache on <https://app.cachix.org/cache> and generate a write auth token.
-2. Replace `mycache` in the following `.gitlab-ci.yml` with your cache name:
+2. Replace `MY_CACHE` in the following `.gitlab-ci.yml` with your cache name:
 
 ```yaml
 image: docker.nix-community.org/nixpkgs/cachix-flakes
 
 build:
   variables:
-    CACHIX_CACHE_NAME: mycache
+    CACHIX_CACHE_NAME: MY_CACHE
   before_script:
     - cachix use "$CACHIX_CACHE_NAME"
   script:

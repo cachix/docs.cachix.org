@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 
 const representativePages = [
   '/', '/getting-started.html', '/pushing.html',
-  '/enterprise/telemetry.html', '/deploy/deploying-to-agents/index.html',
+  '/continuous-integration-setup/github-actions.html', '/deploy/deploying-to-agents/index.html',
 ];
 
 test('brand, responsive layout, and page assets', async ({ page }, testInfo) => {
@@ -34,6 +34,28 @@ test('brand, responsive layout, and page assets', async ({ page }, testInfo) => 
     await blog.hover();
     await expect(blog).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
   }
+});
+
+test('overview task tabs support keyboard selection, copying, and navigation', async ({ page, context, baseURL }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: new URL(baseURL).origin });
+  await page.goto('/');
+  const push = page.getByRole('tab', { name: 'Push a build', exact: true });
+  const use = page.getByRole('tab', { name: 'Use an existing cache', exact: true });
+  await expect(push).toHaveAttribute('aria-selected', 'true');
+  await push.focus();
+  await push.press('ArrowRight');
+  await expect(use).toBeFocused();
+  await expect(use).toHaveAttribute('aria-selected', 'true');
+  const panel = page.getByRole('tabpanel', { name: 'Use an existing cache', exact: true });
+  await expect(panel).toBeVisible();
+  await panel.locator('button[title="Copy to clipboard"]').first().click();
+  await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe('cachix use MY_CACHE');
+  await panel.getByRole('link', { name: 'Use an existing cache', exact: true }).click();
+  await expect(page.locator('h1')).toHaveText('Use an existing cache');
+  await page.goBack();
+  await expect(page.locator('h1')).toHaveText('Cachix documentation');
+  await page.getByRole('tab', { name: 'Use an existing cache', exact: true }).click();
+  await expect(page.getByRole('tabpanel', { name: 'Use an existing cache', exact: true })).toBeVisible();
 });
 
 test('search opens by keyboard, returns results, and closes with Escape', async ({ page }) => {
@@ -76,17 +98,22 @@ test('legacy search query and no-results state', async ({ page }) => {
 });
 
 test('client navigation preserves the document and initializes page controls', async ({ page, context, baseURL }) => {
+  const navigate = async (name) => {
+    const menu = page.getByRole('button', { name: 'Menu', exact: true });
+    if (await menu.isVisible()) await menu.click();
+    await page.locator('#starlight__sidebar').getByRole('link', { name, exact: true }).click();
+  };
   await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: new URL(baseURL).origin });
   await page.goto('/');
   await page.evaluate(() => { window.docsNavigationMarker = true; });
-  await page.locator('main').getByRole('link', { name: 'Pushing to Cachix', exact: true }).click();
+  await navigate('Pushing to Cachix');
   await expect(page.locator('h1')).toHaveText('Pushing to Cachix');
   expect(await page.evaluate(() => window.docsNavigationMarker)).toBe(true);
   await page.locator('.expressive-code button[title="Copy to clipboard"]').first().click();
   await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe('nix-build | cachix push MY_CACHE');
   await page.goBack();
-  await expect(page.locator('h1')).toHaveText('Welcome to Cachix documentation');
-  await page.locator('main').getByRole('link', { name: 'Pins', exact: true }).click();
+  await expect(page.locator('h1')).toHaveText('Cachix documentation');
+  await navigate('Pins');
   await expect(page.locator('h1')).toHaveText('Pins');
   expect(await page.evaluate(() => window.docsNavigationMarker)).toBe(true);
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
@@ -98,12 +125,12 @@ test('client navigation preserves the document and initializes page controls', a
 
 test('copy commands without the terminal prompt', async ({ page, context, baseURL }) => {
   await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: new URL(baseURL).origin });
-  await page.goto('/getting-started.html');
+  await page.goto('/configuring-a-cache.html');
   const buttons = page.locator('.expressive-code button[title="Copy to clipboard"]');
   await buttons.nth(0).click();
   await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe('cachix authtoken <my auth token>');
   await buttons.nth(1).click();
-  await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe('cachix generate-keypair <mycache>');
+  await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe('cachix generate-keypair MY_CACHE');
 });
 
 test('mobile menu, keyboard focus, and navigation', async ({ page }) => {
@@ -134,7 +161,7 @@ test('skip link, legacy anchors, and previous/next navigation', async ({ page })
   await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/#_top$/);
   await page.locator('a[rel="next"]').click();
-  await expect(page.locator('h1')).toHaveText('Pushing to Cachix');
+  await expect(page.locator('h1')).toHaveText('Use an existing cache');
   await page.goto('/faq.html#cachix-use-effects');
   const anchor = page.locator('#cachix-use-effects');
   await expect(anchor).toBeAttached();
@@ -145,16 +172,17 @@ test('skip link, legacy anchors, and previous/next navigation', async ({ page })
 });
 
 test('WCAG accessibility on articles, tables, and search', async ({ page }) => {
-  for (const url of ['/getting-started.html', '/enterprise/telemetry.html', '/search.html?q=pins']) {
+  if (page.viewportSize().width < 800) {
+    await page.goto('/continuous-integration-setup/github-actions.html');
+    const table = page.getByRole('table').first();
+    await expect(table).toHaveAttribute('tabindex', '0');
+    await table.focus();
+    await page.keyboard.press('ArrowRight');
+    await expect.poll(() => table.evaluate((node) => node.scrollLeft)).toBeGreaterThan(0);
+  }
+  for (const url of ['/', '/getting-started.html', '/upstreams.html', '/search.html?q=pins']) {
     await page.goto(url);
     if (url.includes('search.html')) await expect(page.locator('#docs-search .pagefind-ui__result-link').first()).toBeVisible();
-    if (url.includes('telemetry') && page.viewportSize().width < 800) {
-      const table = page.getByRole('table');
-      await expect(table).toHaveAttribute('tabindex', '0');
-      await table.focus();
-      await page.keyboard.press('ArrowRight');
-      await expect.poll(() => table.evaluate((node) => node.scrollLeft)).toBeGreaterThan(0);
-    }
     const audit = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
     expect(audit.violations).toEqual([]);
   }
