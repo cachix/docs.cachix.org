@@ -6,12 +6,10 @@ logo, Mulish font, and brand colors from cachix.org.
 
 ## Development
 
-Use Node.js 24 and npm. `nix-shell` provides Node.js and Lychee (the link checker).
+Launch the preview server:
 
 ```sh
-nix-shell
-npm ci
-npm run dev
+devenv up docs
 ```
 
 Open the local URL printed by Astro. Changes reload automatically. `./live` is

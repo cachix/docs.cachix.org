@@ -1,0 +1,3 @@
+inputs:
+  nixpkgs:
+    url: github:NixOS/nixpkgs/9cf7092bdd603554bd8b63c216e8943cf9b12512
