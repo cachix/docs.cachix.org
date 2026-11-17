@@ -23,8 +23,16 @@ test('brand, responsive layout, and page assets', async ({ page }, testInfo) => 
   }
   expect(errors).toEqual([]);
   if (page.viewportSize().width >= 1100) {
-    const button = page.locator('.header .cachix-signup');
-    expect((await button.boundingBox()).height).toBeLessThanOrEqual(44);
+    const header = page.locator('header.header');
+    expect((await header.boundingBox()).height).toBeLessThanOrEqual(56);
+    expect((await header.getByRole('img', { name: 'Cachix', exact: true }).boundingBox()).width).toBeLessThanOrEqual(96);
+    const login = header.getByRole('link', { name: 'Log in', exact: true });
+    await expect(login).toBeVisible();
+    expect((await login.boundingBox()).height).toBeLessThanOrEqual(36);
+    await expect(header.getByRole('link', { name: 'Sign up', exact: true })).toHaveCount(0);
+    const blog = header.getByRole('link', { name: 'Blog', exact: true });
+    await blog.hover();
+    await expect(blog).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
   }
 });
 
