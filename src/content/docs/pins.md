@@ -22,6 +22,14 @@ Pins are useful for:
 - Exposing files from within a store path.
 - Controlling the retention of certain store paths.
 
+## Roots and dependency closures
+
+<!-- TODO: Use a release output to show which runtime dependencies its pin protects and how long that protection lasts. -->
+
+## Pins and upstreams
+
+[Upstream caches](/upstreams.html#retain-content-from-upstreams)
+
 ## How to Create a Pin {#how-to-create-a-pin}
 
 1. **Choose a name for your pin** - This could be anything, but we recommend choosing something meaningful, like the tool’s name, version, git revision, or some combination of them all. For example, `v1.7`.

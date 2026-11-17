@@ -12,13 +12,17 @@ There are different ways to push store paths to Cachix.
 
 These instructions assume your binary cache is called `mycache`.
 
-## Pushing runtime dependencies {#pushing-runtime-dependencies}
+## Store paths and closures
+
+## Choose what to push
+
+### Pushing runtime dependencies {#pushing-runtime-dependencies}
 
 ```console
 $ nix-build | cachix push mycache
 ```
 
-## Pushing build and runtime dependencies {#pushing-build-and-runtime-dependencies}
+### Pushing build and runtime dependencies {#pushing-build-and-runtime-dependencies}
 
 ```console
 $ nix-store -qR --include-outputs $(nix-store -qd $(nix-build)) \
@@ -26,29 +30,17 @@ $ nix-store -qR --include-outputs $(nix-store -qd $(nix-build)) \
   | cachix push mycache
 ```
 
-## Pushing shell environment {#pushing-shell-environment}
+### Pushing shell environment {#pushing-shell-environment}
 
 ```console
 $ nix-build shell.nix -A inputDerivation \
   | cachix push mycache
 ```
 
-## Pushing whole /nix/store {#pushing-whole-nix-store}
+### Pushing whole /nix/store {#pushing-whole-nix-store}
 
 ```console
 $ nix path-info --all | cachix push mycache
-```
-
-## Pushing all newly built store paths {#pushing-all-newly-built-store-paths}
-
-```console
-$ cachix watch-store mycache
-```
-
-## Push all store paths produced during a command {#push-all-store-paths-produced-during-a-command}
-
-```console
-$ cachix watch-exec mycache -- nix-build --max-jobs 4
 ```
 
 ## Flakes {#flakes}
@@ -90,3 +82,25 @@ Note: to build all packages, leave a thumbs up on [NixOS/nix#7165](https://githu
 $ nix develop --profile dev-profile -c true
 $ cachix push mycache dev-profile
 ```
+
+## Automatic uploads
+
+### Pushing all newly built store paths {#pushing-all-newly-built-store-paths}
+
+```console
+$ cachix watch-store mycache
+```
+
+### Push all store paths produced during a command {#push-all-store-paths-produced-during-a-command}
+
+```console
+$ cachix watch-exec mycache -- nix-build --max-jobs 4
+```
+
+### Daemon {#daemon}
+
+[Daemon command reference](/cli.html#daemon)
+
+### Continuous integration
+
+[Cache builds in CI](/continuous-integration-setup/index.html)

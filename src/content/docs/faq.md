@@ -1,6 +1,6 @@
 ---
-title: "Frequently Asked Questions"
-description: "Before working through the questions below, run cachix doctor (available since version 1.10). It inspects your installation, configuration, and authentication, and reports the…"
+title: "FAQ"
+description: "FAQ"
 slug: "faq.html"
 ---
 
@@ -8,13 +8,7 @@ slug: "faq.html"
 
 ## First step for any problem: run `cachix doctor` {#first-step-for-any-problem-run-cachix-doctor}
 
-Before working through the questions below, run `cachix doctor` (available since version 1.10).
-It inspects your installation, configuration, and authentication, and reports the most common
-misconfigurations along with a suggested fix:
-
-```console
-$ cachix doctor
-```
+See [Using the CLI](/cli.html#first-step-for-any-problem-run-cachix-doctor).
 
 If `cachix doctor` reports everything is healthy and you still see a problem, continue with the
 questions below.
@@ -93,11 +87,7 @@ Pass `--option substitute false` to Nix commands.
 
 ## What happens when I run cachix use (both immediately and any stateful effects for the future)? {#what-happens-when-i-run-cachix-use-both-immediately-and-any-stateful-effects-for-the-future}
 
-It will modify `nix.conf` and append substituters and trusted-public-keys.
-If you’re using NixOS, it will write NixOS configuration.
-If you’re a trusted-user it will append to `~/.config/nix/nix.conf`.
-
-Otherwise it will either fail in case configuration cannot be written or it will append to `/etc/nix/nix.conf`.
+See [Configuring Nix](/configuring-a-cache.html#configuring-nix).
 
 ## I get `InvalidPath` error from Nix when invoking Cachix {#i-get-invalidpath-error-from-nix-when-invoking-cachix}
 
@@ -130,26 +120,4 @@ $ curl -s --netrc-file ~/.config/nix/netrc https://mycache.cachix.org/nix-cache-
 
 ## How do I supply a custom CA certificate? {#how-do-i-supply-a-custom-ca-certificate}
 
-By default, Cachix loads trusted certificates from the system store
-(`/etc/ssl/certs` on Linux, the keychain on macOS, the system store on Windows).
-
-If you are behind a TLS intercepting corporate proxy or use your own certificate authority,
-point Cachix at your certificate bundle using one of the following environment variables:
-
-<dl class="simple">
-<dt><code><span>SSL_CERT_FILE</span></code></dt><dd><p>Path to a PEM bundle containing one or more trusted certificates.</p>
-</dd>
-<dt><code><span>SSL_CERT_DIR</span></code></dt><dd><p>Path to a directory of PEM certificates (each file must contain a single certificate).</p>
-</dd>
-</dl>
-
-Example:
-
-```console
-$ export SSL_CERT_FILE=/path/to/corporate-ca-bundle.pem
-$ cachix push mycache ./result
-```
-
-Note that `cachix` does not currently read `NIX_SSL_CERT_FILE`.
-If you have configured Nix with `NIX_SSL_CERT_FILE`, set `SSL_CERT_FILE`
-to the same path so that `cachix` uses the same trust store.
+See [Custom CA certificates](/cli.html#how-do-i-supply-a-custom-ca-certificate).

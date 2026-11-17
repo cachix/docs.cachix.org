@@ -30,7 +30,6 @@ export default defineConfig({
       editLink: { baseUrl: 'https://github.com/cachix/docs.cachix.org/edit/master/' },
       customCss: ['./src/styles/cachix.css'],
       routeMiddleware: './src/route-data.ts',
-      expressiveCode: { themes: ['github-light'] },
       components: {
         ThemeProvider: './src/components/ThemeProvider.astro',
         ThemeSelect: './src/components/ThemeSelect.astro',
@@ -40,6 +39,7 @@ export default defineConfig({
         SocialIcons: './src/components/SiteNavigation.astro',
       },
       plugins: [siteKitStarlight({
+        terminalCopy: false,
         footer: {
           title: 'Cachix',
           description: 'Never build software twice.',
