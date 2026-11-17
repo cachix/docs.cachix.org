@@ -76,3 +76,11 @@ If you’re using NixOS, it will write NixOS configuration.
 If you’re a trusted-user it will append to `~/.config/nix/nix.conf`.
 
 Otherwise it will either fail in case configuration cannot be written or it will append to `/etc/nix/nix.conf`.
+
+### Public signing keys {#public-signing-keys}
+
+After adding an upstream, run `cachix use <cache-name>` again on each machine that uses your cache.
+This configures Nix with all the public signing keys your cache advertises.
+
+If you manage `nix.conf` yourself, open your cache in the Cachix dashboard.
+Copy all the keys listed under Public signing keys and add them to `extra-trusted-public-keys`, separated by spaces.
