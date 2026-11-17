@@ -14,7 +14,7 @@ pkgs.buildNpmPackage {
       ]);
   };
   nodejs = pkgs.nodejs_24;
-  npmDepsHash = "sha256-ntc6AJpB10sd7bHrV+rHe42DpOdiyXDxwL9uc5A0E08=";
+  npmDepsHash = "sha256-jiBVb3GEjWe4KeZmY/NuBBrQb1Fk8AlySqoFOOCEdlM=";
   nativeBuildInputs = [ pkgs.lychee ];
   env.ASTRO_TELEMETRY_DISABLED = "1";
   env.SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";

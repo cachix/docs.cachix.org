@@ -10,18 +10,26 @@ import '@pagefind/default-ui/css/ui.css';
 <script>
   import { PagefindUI } from '@pagefind/default-ui';
 
-  const search = new PagefindUI({
-    element: '#docs-search',
-    bundlePath: '/pagefind/',
-    showImages: false,
-    showSubResults: true,
-    processResult: (result) => {
-      result.url = result.url.replace(/(.)\/(#.*)?$/, '$1$2');
-      result.sub_results?.forEach((sub) => { sub.url = sub.url.replace(/(.)\/(#.*)?$/, '$1$2'); });
-      return result;
-    },
+  let search: PagefindUI | undefined;
+  document.addEventListener('astro:page-load', () => {
+    if (!document.getElementById('docs-search')) return;
+    search = new PagefindUI({
+      element: '#docs-search',
+      bundlePath: '/pagefind/',
+      showImages: false,
+      showSubResults: true,
+      processResult: (result) => {
+        result.url = result.url.replace(/(.)\/(#.*)?$/, '$1$2');
+        result.sub_results?.forEach((sub) => { sub.url = sub.url.replace(/(.)\/(#.*)?$/, '$1$2'); });
+        return result;
+      },
+    });
+    // Preserve links from the old Sphinx search form, including ?q= queries.
+    const query = new URLSearchParams(window.location.search).get('q');
+    if (query) search.triggerSearch(query);
   });
-  // Preserve links from the old Sphinx search form, including ?q= queries.
-  const query = new URLSearchParams(window.location.search).get('q');
-  if (query) search.triggerSearch(query);
+  document.addEventListener('astro:before-swap', () => {
+    search?.destroy();
+    search = undefined;
+  });
 </script>

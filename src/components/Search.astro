@@ -4,17 +4,24 @@ import Default from '@astrojs/starlight/components/Search.astro';
 <Default {...Astro.props} />
 
 <script>
+  const observers: MutationObserver[] = [];
   // Search loads on idle. If the dialog opens first, focus its input once
   // Pagefind has inserted it, so keyboard users can start typing immediately.
-  for (const search of document.querySelectorAll('site-search')) {
-    const observer = new MutationObserver(focusWhenReady);
-    function focusWhenReady() {
-      const input = search.querySelector('input');
-      if (!input) return;
-      observer.disconnect();
-      if (search.querySelector('dialog')?.open) input.focus();
+  document.addEventListener('astro:page-load', () => {
+    for (const search of document.querySelectorAll('site-search')) {
+      const observer = new MutationObserver(focusWhenReady);
+      function focusWhenReady() {
+        const input = search.querySelector('input');
+        if (!input) return;
+        observer.disconnect();
+        if (search.querySelector('dialog')?.open) input.focus();
+      }
+      observers.push(observer);
+      observer.observe(search, { childList: true, subtree: true });
+      focusWhenReady();
     }
-    observer.observe(search, { childList: true, subtree: true });
-    focusWhenReady();
-  }
+  });
+  document.addEventListener('astro:before-swap', () => {
+    observers.splice(0).forEach((observer) => observer.disconnect());
+  });
 </script>
