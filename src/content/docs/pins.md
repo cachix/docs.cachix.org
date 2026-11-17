@@ -58,11 +58,20 @@ revision. Its `storePath` lacks the name suffix and its artifact links are unava
 ## Controlling Retention with Pins {#controlling-retention-with-pins}
 
 Pins maintain a history of revisions for each pin name. A new revision is created every time a store path is pinned with the same name.
-All revisions are kept indefinitely by default. You can choose to keep just the revisions added in the last X days with `--keep-days`, or just the last X revisions with `--keep-revisions`.
+All revisions are kept indefinitely by default. Use one of these retention policies:
+
+- `--keep-days N`: Each revision expires N days after it was created, including the latest revision. Cachix deletes the pin when no revisions remain.
+- `--keep-revisions N`: Keep the latest N revisions. These revisions do not expire with time.
+
+To create a pin that expires after 3 days:
 
 ```bash
 $ cachix pin mycache v1.0 /nix/store/xxx-name-1.0 --keep-days 3
 ```
+
+If you add no more revisions to `v1.0`, Cachix deletes the pin when the background expiry job runs after those 3 days. If you add another revision with the same name, that revision has its own 3-day lifetime. The pin remains until all its revisions have expired.
+
+Expiry removes the pin's protection from [garbage collection](/garbage-collection.html#garbage-collection). It does not immediately delete the store paths or their files. Paths protected by another pin remain protected.
 
 ## Exposing Files with Artifacts {#exposing-files-with-artifacts}
 
