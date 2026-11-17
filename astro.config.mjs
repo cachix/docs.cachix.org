@@ -15,6 +15,9 @@ export default defineConfig({
   // Starlight slugs include .html so navigation, canonicals, and search agree.
   // Flatten Astro's directory output into the original Sphinx file layout.
   build: { format: 'directory' },
+  vite: {
+    server: { watch: { ignored: ['**/.devenv', '**/.devenv/**'] } },
+  },
   markdown: { processor: unified({ remarkPlugins: [legacyHeadingIds, keyboardTables] }) },
   integrations: [
     starlight({
