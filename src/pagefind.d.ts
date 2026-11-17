@@ -12,5 +12,6 @@ declare module '@pagefind/default-ui' {
       processResult?: (result: SearchResult) => SearchResult;
     });
     triggerSearch(query: string): void;
+    destroy(): void;
   }
 }

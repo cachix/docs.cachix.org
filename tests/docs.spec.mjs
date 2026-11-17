@@ -58,6 +58,34 @@ test('legacy search query and no-results state', async ({ page }) => {
   await expect(result).toHaveAttribute('href', /\/pins\.html(?:#.*)?$/);
   await search.getByRole('textbox').fill('zzzz-no-such-cachix-page-zzzz');
   await expect(search.locator('.pagefind-ui__message')).toContainText(/no results/i);
+  await search.getByRole('textbox').fill('pins');
+  await expect(result).toBeVisible();
+  await result.click();
+  await expect(page.locator('h1')).toHaveText('Pins');
+  await page.goBack();
+  await expect(search.getByRole('textbox')).toHaveValue('pins');
+  await expect(result).toBeVisible();
+});
+
+test('client navigation preserves the document and initializes page controls', async ({ page, context, baseURL }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: new URL(baseURL).origin });
+  await page.goto('/');
+  await page.evaluate(() => { window.docsNavigationMarker = true; });
+  await page.locator('main').getByRole('link', { name: 'Pushing to Cachix', exact: true }).click();
+  await expect(page.locator('h1')).toHaveText('Pushing to Cachix');
+  expect(await page.evaluate(() => window.docsNavigationMarker)).toBe(true);
+  await page.locator('.expressive-code button[title="Copy to clipboard"]').first().click();
+  await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe('nix-build | cachix push MY_CACHE');
+  await page.goBack();
+  await expect(page.locator('h1')).toHaveText('Welcome to Cachix documentation');
+  await page.locator('main').getByRole('link', { name: 'Pins', exact: true }).click();
+  await expect(page.locator('h1')).toHaveText('Pins');
+  expect(await page.evaluate(() => window.docsNavigationMarker)).toBe(true);
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await page.keyboard.press('ControlOrMeta+k');
+  const dialog = page.getByRole('dialog', { name: 'Search' });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole('textbox')).toBeFocused();
 });
 
 test('copy commands without the terminal prompt', async ({ page, context, baseURL }) => {
@@ -85,6 +113,10 @@ test('mobile menu, keyboard focus, and navigation', async ({ page }) => {
   await page.locator('#starlight__sidebar').getByRole('link', { name: 'Pushing to Cachix', exact: true }).click();
   await expect(page.locator('h1')).toHaveText('Pushing to Cachix');
   await expect(page.locator('body')).not.toHaveAttribute('data-mobile-menu-expanded', '');
+  await button.click();
+  await expect(button).toHaveAttribute('aria-expanded', 'true');
+  await page.keyboard.press('Escape');
+  await expect(button).toHaveAttribute('aria-expanded', 'false');
 });
 
 test('skip link, legacy anchors, and previous/next navigation', async ({ page }) => {

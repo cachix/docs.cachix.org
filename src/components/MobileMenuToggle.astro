@@ -4,13 +4,21 @@ import Default from '@astrojs/starlight/components/MobileMenuToggle.astro';
 <Default />
 
 <script>
+  const observers: MutationObserver[] = [];
   // Starlight keeps state on the custom element. Mirror it to the actual
   // button so assistive technology announces the open/closed state correctly.
-  for (const menu of document.querySelectorAll('starlight-menu-button')) {
-    const sync = () => menu.querySelector('button')?.setAttribute(
-      'aria-expanded', String(menu.getAttribute('aria-expanded') === 'true'),
-    );
-    new MutationObserver(sync).observe(menu, { attributes: true, attributeFilter: ['aria-expanded'] });
-    sync();
-  }
+  document.addEventListener('astro:page-load', () => {
+    for (const menu of document.querySelectorAll('starlight-menu-button')) {
+      const sync = () => menu.querySelector('button')?.setAttribute(
+        'aria-expanded', String(menu.getAttribute('aria-expanded') === 'true'),
+      );
+      const observer = new MutationObserver(sync);
+      observer.observe(menu, { attributes: true, attributeFilter: ['aria-expanded'] });
+      observers.push(observer);
+      sync();
+    }
+  });
+  document.addEventListener('astro:before-swap', () => {
+    observers.splice(0).forEach((observer) => observer.disconnect());
+  });
 </script>

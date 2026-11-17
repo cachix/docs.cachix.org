@@ -19,7 +19,7 @@
   "dependencies": {
     "@astrojs/markdown-remark": "7.2.2",
     "@astrojs/starlight": "0.41.4",
-    "@cachix/site-kit": "https://codeload.github.com/cachix/site-kit/tar.gz/fee8d1c3768abb21733f4b46712a22d130aa6e68",
+    "@cachix/site-kit": "https://codeload.github.com/cachix/site-kit/tar.gz/f61f46c72b4e78d0a7d1e5858a4b973c896beb88",
     "@fontsource/mulish": "^5.2.8",
     "@pagefind/default-ui": "1.5.2",
     "astro": "7.1.6"
