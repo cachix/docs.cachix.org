@@ -6,7 +6,7 @@ slug: "security.html"
 
 <span id="security" class="legacy-anchor"></span>
 
-## Login using GitHub {#login-using-github}
+## Log in using GitHub {#login-using-github}
 
 For private caches, read-only access to GitHub organizations is needed
 and due to the way oauth works that’s requested at initial login.

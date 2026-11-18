@@ -1,6 +1,6 @@
 ---
 title: "Getting Started"
-description: "With Nix and Cachix installed you can cache any Nix build result."
+description: "Create a Cachix cache, authenticate the CLI, and upload your first Nix build."
 slug: "getting-started.html"
 ---
 
@@ -8,45 +8,72 @@ slug: "getting-started.html"
 
 <span id="getting-started" class="legacy-anchor"></span>
 
-## Install Cachix
+Create a binary cache on Cachix and upload a Nix build result so you can reuse it on other machines and in CI.
 
-Install [Nix and Cachix](/installation.html#installation).
+## Create a cache {#creating-the-cache}
 
-## Creating the cache {#creating-the-cache}
+1. Sign in to the [Cachix dashboard](https://app.cachix.org), or create an account if you don't have one.
+2. Select **New Cache**.
+3. Enter a **Unique name** using lowercase letters, numbers, and dashes. The name becomes part of your cache’s URL: `https://YOUR-CACHE-NAME.cachix.org`.
+4. Choose **Public** if anyone should be able to download your builds, or **Private** to restrict downloads to authorized users. Private caches require an active subscription.
+5. <span id="signing-key-advanced" class="legacy-anchor"></span>For signing, choose **Managed by Cachix**. This is the recommended option: Cachix creates the signing key and signs uploaded paths for you. If you need to manage your own key, see [self-signed cache configuration](/configuring-a-cache.html#signing-key-advanced).
+6. Select **Create Cache** to open your new cache’s dashboard.
 
-With [Nix and Cachix installed](/installation.html#installation)
-you can cache any Nix build result.
+Replace `MY_CACHE` with the name you chose in all commands below.
 
-After logging into [Cachix](https://app.cachix.org)
-you’ll be able to create a new binary cache.
+<span id="organizing-your-caches" class="legacy-anchor"></span>
+If you're setting up caches for several teams or projects, see [Organizing your caches](/configuring-a-cache.html#organizing-your-caches).
 
-### Organizing your caches {#organizing-your-caches}
+## Install the CLI
 
-See [Organizing your caches](/configuring-a-cache.html#organizing-your-caches).
+Install [Nix and the Cachix CLI](/installation.html#installation) on the machine you'll upload builds from.
 
-## Authenticating {#authenticating}
+## Authenticate the CLI {#authenticating}
 
-See [Authenticating](/configuring-a-cache.html#authenticating) to generate an [access token](/glossary.html#term-access-token).
+Create a token that lets the CLI upload to your new cache:
 
-You can set the auth token with either:
+1. Open your cache’s **Settings** and go to its auth tokens page.
+2. Enter a description, such as `local development`, choose **Read and write** access, and select an expiration.
+3. Select **Create token** and copy the token. Cachix shows it only once.
 
-1. `$ cachix authtoken XXX`
-2. `$ export CACHIX_AUTH_TOKEN=XXX`
+Save the token in your local Cachix configuration, replacing `YOUR_TOKEN` with the value you copied:
 
-:::tip
-Run `cachix doctor` to verify your configuration and authentication are set up correctly.
-:::
+```console
+$ cachix authtoken YOUR_TOKEN
+```
 
-## Signing key (advanced) {#signing-key-advanced}
+Check that the CLI can connect and authenticate:
 
-See [Signing key (advanced)](/configuring-a-cache.html#signing-key-advanced).
+```console
+$ cachix doctor --cache MY_CACHE
+```
 
-## Pushing binaries with Cachix {#pushing-binaries-with-cachix}
+For CI, supply the token through `CACHIX_AUTH_TOKEN` instead of saving it locally.
+See [Authentication](/configuring-a-cache.html#authenticating) for other token options.
 
-<!-- TODO: Guide the reader through building their own project with nix-build and pushing ./result using the cache name chosen above. Explain the default.nix prerequisite and show how to recognize a successful push. -->
+## Build and push {#pushing-binaries-with-cachix}
 
-In a project with a `default.nix` that builds a package, run the following commands.
-Replace `MY_CACHE` with the name you chose above.
+Create a directory for a small example build:
+
+```console
+$ mkdir cachix-example
+$ cd cachix-example
+```
+
+Save the following as `default.nix`.
+It builds a directory containing a greeting:
+
+```nix title="default.nix"
+let
+  pkgs = import <nixpkgs> {};
+in
+pkgs.runCommand "hello-cachix" {} ''
+  mkdir -p "$out"
+  echo "Hello from Cachix!" > "$out/message"
+''
+```
+
+Build it and upload the result to your cache:
 
 ```console
 $ nix-build
@@ -54,18 +81,30 @@ $ cachix push MY_CACHE ./result
 ```
 
 `nix-build` creates a `result` symlink to the output in the Nix store.
-Cachix follows that link, checks its dependencies, and uploads the missing paths.
+Cachix follows that link and uploads the result and its runtime dependencies, skipping paths already available from the cache or its upstreams.
 A successful push exits with status zero, including when all paths are already available.
 
-It’s recommended to set up [Continuous Integration to push](/continuous-integration-setup/index.html#getting-started-ci) for every branch of every project.
+## Verify the upload
 
-See [all different ways of pushing](/pushing.html#pushing).
+Check that the build result is available:
 
-## Verify the cached build
+```console
+$ cachix doctor --cache MY_CACHE "$(nix path-info ./result)"
+```
 
-Search for the output path printed by `nix-build` in your cache’s dashboard.
-To verify that another machine can download it, follow the steps below.
+Look for `found in cache` in the store path check.
 
-### Using binaries with Nix {#using-binaries-with-nix}
+## Use your cache {#using-binaries-with-nix}
 
-See [Use an existing cache](/using-a-cache.html) to configure Nix and use the builds you pushed.
+Configure Nix to download builds from your cache:
+
+```console
+$ cachix use MY_CACHE
+```
+
+Run this on each machine that should use the cache.
+For private caches, authenticate on those machines first; a read-only token is sufficient for downloads.
+Follow any configuration instructions printed by `cachix use`, or see [Use an existing cache](/using-a-cache.html) for details.
+
+To upload future builds automatically, [set up CI](/continuous-integration-setup/index.html).
+See [Pushing to Cachix](/pushing.html) for other ways to upload builds.

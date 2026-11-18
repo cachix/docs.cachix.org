@@ -11,7 +11,7 @@ export const sidebar = [
   ] },
   { label: 'Continuous Integration', items: [
     page('Caching builds in CI', 'continuous-integration-setup/index'),
-    page('GitHub Actions (cachix-action)', 'continuous-integration-setup/github-actions'),
+    page('GitHub Actions', 'continuous-integration-setup/github-actions'),
     page('Buildkite', 'continuous-integration-setup/buildkite'),
     page('CircleCI', 'continuous-integration-setup/circleci'),
     page('GitLab CI', 'continuous-integration-setup/gitlab'),

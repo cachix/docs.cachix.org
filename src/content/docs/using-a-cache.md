@@ -1,44 +1,91 @@
 ---
 title: "Use an existing cache"
+description: "Configure Nix to download builds from a public or private Cachix cache and verify access with cachix doctor."
 slug: "using-a-cache.html"
 ---
 
-## Before you start
+Use the Cachix CLI to configure Nix to download builds from an existing Cachix cache.
+Once configured, Nix checks the cache during your normal builds and downloads matching results instead of rebuilding them.
 
-Install [Nix and Cachix](/installation.html#installation).
+## Find the cache name
+
+Get the cache name from the project’s documentation or the person sharing the cache.
+For a cache at `https://my-team.cachix.org`, the name is `my-team`.
+Replace `MY_CACHE` with that name in the commands below.
+
+If you want to create your own cache, follow [Make your first push](/getting-started.html).
+
+## Install the CLI
+
+Install [Nix and the Cachix CLI](/installation.html#installation) on each machine that should use the cache.
 
 ## Authenticate for a private cache
 
-:::note
-For read access to private caches you’ll also need to run `cachix authtoken XXX` or export CACHIX_AUTH_TOKEN=xxx before invoking `cachix use` in order to configure [access token](/glossary.html#term-access-token), to be used for authenticating using netrc file.
-:::
+For a public cache, skip this step. You don't need a Cachix account or token to download public builds.
+
+For a private cache, ask the cache owner for a token with read access.
+If you manage the cache, you can create a **Read only** token in its **Settings**.
+Save the token in your local Cachix configuration, replacing `YOUR_TOKEN` with its value:
+
+```console
+$ cachix authtoken YOUR_TOKEN
+```
+
+Authenticate before running `cachix use` so it can configure Nix’s access to the private cache.
+For CI, supply the token through `CACHIX_AUTH_TOKEN` instead.
 
 ## Configure Nix
 
-With [Nix and Cachix installed](/installation.html#installation) invoke:
+Add the cache to your Nix configuration:
 
 ```console
 $ cachix use MY_CACHE
 ```
 
-Replace `MY_CACHE` with your cache name to configure Nix to use your binary cache.
+This adds the cache’s URL and public signing keys so Nix can download and verify its builds.
+Follow any instructions printed by the command to finish applying the configuration.
+On NixOS, this can include importing the generated module and running `sudo nixos-rebuild switch`.
+See [Configuring Nix](/configuring-a-cache.html#configuring-nix) for how Cachix chooses where to write the configuration.
 
-There are different ways to configure Nix so Cachix will pick [the most appropriate one](/configuring-a-cache.html#configuring-nix) for your setup.
+## Verify the cache
 
-## Verify a cache hit
+Run `cachix doctor` to check your Cachix configuration, connectivity, and authentication:
 
-<!-- TODO: Build the same project with the same inputs on a compatible machine where the output is missing. Include the Nix log line that identifies the cache it was downloaded from. -->
+```console
+$ cachix doctor --cache MY_CACHE
+```
 
-On a second machine with the same system type, configure the cache as above.
-Choose a machine whose Nix store does not already contain the output.
-Check out the same project revision and use the same Nix inputs as the original build.
+If a check fails, follow its diagnostic message before continuing.
 
-For a project with a `default.nix`, run `nix-build`.
-Look for a line like this in the build log, with your output path and cache name:
+## Use cached builds
+
+Build your project as usual. For a project with a `default.nix`:
+
+```console
+$ nix-build
+```
+
+For a flake project, use `nix build` instead.
+Nix needs a cached result for the exact store path your build requests, which depends on the build’s inputs and system type.
+
+When Nix downloads a build result, its log identifies the cache:
 
 ```text
 copying path '/nix/store/…-myproject-1.0' from 'https://MY_CACHE.cachix.org'...
 ```
 
-If Nix builds the output locally, compare its store path with the one you pushed.
-See [Troubleshooting cache misses](/faq.html#why-is-nix-not-picking-up-on-any-of-the-pre-built-artifacts).
+If the result is already in your local Nix store, Nix reuses it without downloading it again.
+
+## Check a specific build
+
+To check whether an existing build result is available from the cache, pass its store path:
+
+```console
+$ cachix doctor --cache MY_CACHE "$(nix path-info ./result)"
+```
+
+Replace `./result` with your build result symlink.
+Look for `found in cache` in the store path check.
+This works even when the result is already in your local Nix store.
+
+If the path is available but Nix builds it locally, see [Troubleshooting cache misses](/faq.html#why-is-nix-not-picking-up-on-any-of-the-pre-built-artifacts).

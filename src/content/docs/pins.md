@@ -20,9 +20,22 @@ Pins are useful for:
 - Exposing files from within a store path.
 - Controlling the retention of certain store paths.
 
-## Roots and dependency closures
+## How to create a pin {#how-to-create-a-pin}
 
-<!-- TODO: Use a release output to show which runtime dependencies its pin protects and how long that protection lasts. -->
+For a project that builds with `nix-build`, the following commands publish a release and name it `stable`.
+Replace `MY_CACHE` with your destination cache.
+
+```console
+$ nix-build
+$ cachix push MY_CACHE ./result
+$ cachix pin MY_CACHE stable ./result --keep-revisions 3
+$ cachix pins get MY_CACHE stable
+```
+
+Reuse the name `stable` for the next release to keep its three most recent revisions.
+Open the **Pins** tab in your cache’s dashboard to view or manage them.
+
+## Roots and dependency closures
 
 The store path you pin is the **root** of a revision.
 Its **closure** includes the root and every store path reachable through its references.
@@ -39,64 +52,7 @@ $ nix-store --query --requisites ./result
 Each retained revision protects its closure.
 If two releases use the same library, expiring the older revision still leaves the library protected by the newer one.
 
-## Pins and upstreams
-
-You can pin a release even if its root exists only in a direct Cachix upstream.
-Write access to the destination is sufficient.
-Cachix checks the root and its dependencies against the destination and its [eligible upstreams](/upstreams.html#limitations).
-If a required path is missing, pin creation fails and any previous revision stays in place.
-
-Cachix retains the selected upstream paths in the destination and reuses their stored archives.
-These paths count toward the destination’s pinned storage and remain available if you remove or delete the source cache.
-Pins that share a dependency in the same cache count that dependency once.
-
-A managed destination signs the retained paths with its own key.
-A self-signed destination keeps the original signatures and continues to advertise their public keys, even after you remove the upstream.
-
-A dependency known to exist on a configured `cache.nixos.org` can satisfy the closure check without being copied.
-Clients still fetch it from NixOS.
-The pin root itself must have store path metadata in the destination or a direct Cachix upstream.
-
-## How to Create a Pin {#how-to-create-a-pin}
-
-For a project that builds with `nix-build`, the following commands publish a release and name it `stable`.
-Replace `MY_CACHE` with your destination cache.
-
-```console
-$ nix-build
-$ cachix push MY_CACHE ./result
-$ cachix pin MY_CACHE stable ./result --keep-revisions 3
-$ cachix pins get MY_CACHE stable
-```
-
-The push skips paths already available upstream.
-The pin retains the release in `MY_CACHE`.
-Reuse the name `stable` for the next release to keep its three most recent revisions.
-Open the **Pins** tab in your cache’s dashboard to view or manage them.
-
-## Getting Pin Information {#getting-pin-information}
-
-Use `cachix pins get` to retrieve a pin's metadata and latest revision.
-The command uses the existing pin listing API and selects the exact pin name
-locally. It does not require a server upgrade.
-
-```bash
-$ cachix pins get MY_CACHE 'mypin:1.0.0'
-$ cachix pins get MY_CACHE 'mypin:1.0.0' --json
-```
-
-The JSON output is one object with `name`, `createdOn`, `keep`, and
-`lastRevision`. The latest revision contains `storePath`, `revision`, `createdOn`,
-`artifacts`, and `orphaned`.
-
-Pin names are literal. For example, `mypin:1.0.0` is a pin name, not a revision
-selector. Public caches allow anonymous reads. Private caches require a token
-with read access. A missing pin produces a nonzero exit status.
-
-If `orphaned` is `true`, the cache no longer has the store path metadata for that
-revision. Its `storePath` lacks the name suffix and its artifact links are unavailable.
-
-## Controlling Retention with Pins {#controlling-retention-with-pins}
+## Controlling retention {#controlling-retention-with-pins}
 
 Pins maintain a history of revisions for each pin name.
 A new revision is created every time a store path is pinned with the same name.
@@ -122,13 +78,47 @@ Clearing a cache preserves pinned content.
 To remove protection for every revision in the cache, use **Delete all pins** in the cache settings.
 Unprotected paths then become eligible for collection.
 
-## Exposing Files with Artifacts {#exposing-files-with-artifacts}
+## Getting pin information {#getting-pin-information}
+
+Use `cachix pins get` to retrieve a pin's metadata and latest revision.
+The command uses the existing pin listing API and selects the exact pin name
+locally. It does not require a server upgrade.
+
+```bash
+$ cachix pins get MY_CACHE 'mypin:1.0.0'
+$ cachix pins get MY_CACHE 'mypin:1.0.0' --json
+```
+
+The JSON output is one object with `name`, `createdOn`, `keep`, and
+`lastRevision`. The latest revision contains `storePath`, `revision`, `createdOn`,
+`artifacts`, and `orphaned`.
+
+Pin names are literal. For example, `mypin:1.0.0` is a pin name, not a revision
+selector. Public caches allow anonymous reads. Private caches require a token
+with read access. A missing pin produces a nonzero exit status.
+
+If `orphaned` is `true`, the cache no longer has the store path metadata for that
+revision. Its `storePath` lacks the name suffix and its artifact links are unavailable.
+
+## Exposing files with artifacts {#exposing-files-with-artifacts}
 
 Pins allow you to expose and serve certain files from within a store path. Multiple artifacts can be added with the `--artifact` option when creating a new pin.
 
 ```bash
 $ cachix pin MY_CACHE v1.0 /nix/store/xxx-name-1.0 --artifact etc/nginx.conf --artifact bin/name
 ```
+
+## Pins and upstreams
+
+When you create a pin, Cachix retains any required paths found in your cache’s [direct Cachix upstreams](/upstreams.html#limitations), including the root path if it is missing from your cache.
+If a required path is missing from both the cache and its upstreams, pin creation fails without changing the existing pin.
+
+The retained paths count toward your cache’s pinned storage and remain available if the source cache is removed or garbage collected.
+You do not need to upload those paths again.
+
+Dependencies supplied by `cache.nixos.org` remain external and are not retained in your cache.
+Your cache must have `cache.nixos.org` configured as an upstream, and clients must be able to download those dependencies from it.
+The root path must exist in your cache or a direct Cachix upstream.
 
 ## Examples {#examples}
 

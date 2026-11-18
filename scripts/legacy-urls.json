@@ -12,7 +12,7 @@
     ]
   },
   "/continuous-integration-setup/github-actions.html": {
-    "title": "GitHub Actions (recommended)",
+    "title": "GitHub Actions",
     "ids": [
       "github-actions-recommended"
     ]

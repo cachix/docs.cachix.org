@@ -1,5 +1,5 @@
 ---
-title: "GitHub Actions (recommended)"
+title: "GitHub Actions"
 description: "Configure cachix-action, authentication, and automatic uploads in GitHub Actions."
 slug: "continuous-integration-setup/github-actions.html"
 ---
