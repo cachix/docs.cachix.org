@@ -63,7 +63,7 @@ $ cd cachix-example
 Save the following as `default.nix`.
 It builds a directory containing a greeting:
 
-```nix title="default.nix"
+```nix title="default.nix" wrap
 let
   pkgs = import <nixpkgs> {};
 in

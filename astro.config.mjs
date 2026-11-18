@@ -6,6 +6,7 @@ import { sidebar } from './src/navigation.mjs';
 import { legacyHeadingIds } from './src/plugins/legacy-heading-ids.mjs';
 import { keyboardTables } from './src/plugins/keyboard-tables.mjs';
 import { htmlFileRoutes } from './src/plugins/html-file-routes.mjs';
+import { sidebarTabOrder } from './src/plugins/sidebar-tab-order.mjs';
 
 export default defineConfig({
   site: 'https://docs.cachix.org',
@@ -16,6 +17,7 @@ export default defineConfig({
   // Flatten Astro's directory output into the original Sphinx file layout.
   build: { format: 'directory' },
   vite: {
+    plugins: [sidebarTabOrder()],
     server: { watch: { ignored: ['**/.devenv', '**/.devenv/**'] } },
   },
   markdown: { processor: unified({ remarkPlugins: [legacyHeadingIds, keyboardTables] }) },
