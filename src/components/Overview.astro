@@ -31,7 +31,7 @@ const management = [
               <Code code={'$ nix-build\n$ cachix push MY_CACHE ./result'} lang="console" wrap title="Project directory" />
               <div class="build-flow" role="img" aria-label="Upload the build result from your machine to your Cachix cache">
                 <span><Icon name="laptop" /> Your machine</span><Icon name="right-arrow" />
-                <span class="flow-cache"><Icon name="database" /> Cachix cache</span>
+                <span class="flow-cache"><img src="/favicon.svg" alt="" width="24" height="24" /> Cachix cache</span>
               </div>
             </div>
           </div>
@@ -46,7 +46,7 @@ const management = [
             <div class="task-example">
               <Code code={'$ cachix use MY_CACHE\n$ nix-build'} lang="console" wrap title="Another machine" />
               <div class="build-flow" role="img" aria-label="Download the build result from the Cachix cache to your machine">
-                <span class="flow-cache"><Icon name="database" /> Cachix cache</span><Icon name="right-arrow" />
+                <span class="flow-cache"><img src="/favicon.svg" alt="" width="24" height="24" /> Cachix cache</span><Icon name="right-arrow" />
                 <span><Icon name="laptop" /> Your machine</span>
               </div>
             </div>
@@ -139,6 +139,7 @@ const management = [
   .build-flow > :global(svg) { width: 1rem; flex-shrink: 0; }
   .build-flow span :global(svg) { width: 1.5rem; height: 1.5rem; }
   .build-flow .flow-cache { color: #2856a0; }
+  .flow-cache img { object-fit: contain; }
   .ci-panel { display: grid; grid-template-columns: 1fr 1.05fr; gap: 2rem; align-items: center; padding: 2rem; border: 1px solid #dbe2eb; border-radius: 0.75rem; background: #f4f7fc; margin-top: 2rem; }
   .ci-copy p { margin: 0.75rem 0 1.25rem; font-size: 0.9375rem; }
   .management, .products { margin-top: 3.5rem; }
